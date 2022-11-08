@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "trackingM1",
+    "slug": "trackingM1",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  },
+  "name": "trackingM1"
+}
