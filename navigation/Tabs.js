@@ -11,6 +11,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Share from "../screens/Share";
 import Stat from "../screens/Stat";
+import { useNavigation } from "@react-navigation/native";
 
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
@@ -27,6 +28,17 @@ const Tab = createBottomTabNavigator();
 
 /////////////
 const Tabs = () => {
+  const navigation = useNavigation();
+
+  const goToProfile = () => {
+    navigation.navigate("Stack", {
+      screen: "Profile",
+      // params: {
+      //   ...fullData,
+      // },
+    });
+  };
+
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -52,7 +64,7 @@ const Tabs = () => {
             </AddBttn>
           ),
           headerLeft: () => (
-            <BurgerBttn onPress={() => alert("pressed")}>
+            <BurgerBttn onPress={goToProfile}>
               <Ionicons name="menu-outline" size={22} color="black" />
             </BurgerBttn>
           ),
