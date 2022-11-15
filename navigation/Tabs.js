@@ -39,8 +39,9 @@ const Tabs = () => {
           // headerShown: false,
           headerStyle: {
             // backgroundColor: "#f4511e",
-            height: 78,
+            // height: 78,
           },
+          headerShadowVisible: false,
           headerTitleStyle: {
             // fontWeight: "bold",
             // fontSize: 40,
@@ -67,6 +68,10 @@ const Tabs = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="md-stats-chart" color={color} size={size} />
           ),
+          headerStyle: {
+            // backgroundColor: "#f4511e",
+            // height: 78,
+          },
           // headerShown: false,
           tabBarShowLabel: false,
         }}
@@ -79,6 +84,10 @@ const Tabs = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="md-people-outline" color={color} size={size} />
           ),
+          headerStyle: {
+            // backgroundColor: "#f4511e",
+            // height: 78,
+          },
           // headerShown: false,
           tabBarShowLabel: false,
         }}
