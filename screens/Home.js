@@ -7,30 +7,36 @@ const Container = styled.View`
 `;
 
 const HedContainer = styled.View`
-  height: 150px;
+  flex: 1;
 `;
 
 const ProjectHed = styled.Text`
-  top: 100px;
-  text-align: center;
   font-size: 18px;
   font-weight: bold;
+  justify-content: center;
+  align-items: center;
 `;
 
 const DateContainer = styled.View`
-  height: 110px;
+  flex: 1;
   border: 1px solid #ddd;
   background-color: #ddd;
+`;
+
+const Tickles = styled.View`
+  flex: 6;
 `;
 
 const Home = () => {
   return (
     <Container>
-      <HedContainer>
+      {/* <HedContainer>
         <ProjectHed>My Routine</ProjectHed>
-      </HedContainer>
+      </HedContainer> */}
 
       <DateContainer></DateContainer>
+
+      <Tickles></Tickles>
     </Container>
   );
 };
