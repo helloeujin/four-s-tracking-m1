@@ -1,110 +1,25 @@
-import React from "react";
-import { View, Text, FlatList } from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { View, Text, FlatList, Dimensions } from "react-native";
 import styled from "styled-components/native";
+import Swiper from "react-native-swiper";
+import EachWeek from "../components/EachWeek";
 
 const marginH = 8;
+const numWeeks = 3;
+const numWeeksArray = [...Array(numWeeks).keys()];
 
-const getDates = () => {
-  const week = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  let weekdays = [];
-  const curr = new Date();
-  const currDay = curr.getDay();
-  const firstDay = curr.getDate() - curr.getDay();
-
-  week.map((day, i) => {
-    const obj = {
-      day: day,
-      date: new Date(curr.setDate(firstDay + i)).getDate(),
-      today: i === currDay ? true : false,
-    };
-    weekdays.push(obj);
-  });
-
-  return weekdays;
-};
-
-const Home = () => {
-  const weekDays = getDates();
-
-  return (
-    <Container>
-      {/* DATES */}
-      <DatesContainer
-        horizontal
-        data={weekDays}
-        keyExtractor={(item) => item.date + ""}
-        contentContainerStyle={{
-          flex: 1,
-          justifyContent: "space-between",
-          marginHorizontal: marginH,
-          marginVertical: 10,
-        }}
-        renderItem={({ item }) => (
-          <OneDay style={{ backgroundColor: item.today ? "#f7f7f7" : "#fff" }}>
-            <DayTxt style={{ fontWeight: item.today ? "700" : "400" }}>
-              {item.day}
-            </DayTxt>
-            <DateTxt style={{ fontWeight: item.today ? "700" : "400" }}>
-              {item.date}
-            </DateTxt>
-          </OneDay>
-        )}
-      />
-
-      {/* TICKLES */}
-      <TicklesContainer>
-        <View>
-          <TicklesHed>Probiotics</TicklesHed>
-          <Tickles
-            horizontal
-            data={weekDays}
-            keyExtractor={(item) => item.date + ""}
-            contentContainerStyle={{
-              flex: 1,
-              justifyContent: "space-between",
-              marginHorizontal: marginH,
-              marginVertical: 10,
-            }}
-            renderItem={({ item }) => <Tickle />}
-          />
-        </View>
-      </TicklesContainer>
-    </Container>
-  );
-};
-
-export default Home;
-
-/////////////////////////////////////////////////////////////////
 const Container = styled.View`
   flex: 1;
   background-color: white;
 `;
-const DatesContainer = styled.FlatList`
-  flex: 1.2;
-  border-bottom-color: #f3f3f3;
-  border-bottom-width: 1px;
-  margin-top: 12px;
-`;
 
-const OneDay = styled.View`
-  background-color: #f7f7f7;
-  border: 1px solid white;
-  align-items: center;
-  justify-content: center;
-  padding-top: 10px;
-  border-radius: 8px;
-`;
-const DayTxt = styled.Text`
-  font-size: 11px;
-  align-items: center;
-`;
-const DateTxt = styled.Text`
-  padding: 13px;
+const WeekContainer = styled.View`
+  flex: 2;
+  margin-top: 30px;
 `;
 
 const TicklesContainer = styled.View`
-  flex: 7;
+  flex: 9;
   margin-left: ${marginH}px;
   margin-right: ${marginH}px;
   margin-top: 25px;
@@ -122,3 +37,89 @@ const Tickle = styled.View`
   border-radius: 43px;
   background-color: #f7f7f7;
 `;
+
+const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+
+const getDates = () => {
+  const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
+  let weekdays = [];
+  const today = new Date();
+  const todayDay = today.getDay();
+
+  const weekArray = [...Array(7 * numWeeks).keys()].map(
+    (_, i) => i - 7 * (numWeeks - 1)
+  );
+
+  weekArray.map((d, i) => {
+    const newDay = new Date();
+    newDay.setDate(newDay.getDate() + d - todayDay);
+
+    const obj = {
+      day: weekDay[((d % 7) + 7) % 7],
+      dateFull: newDay,
+      date: newDay.getDate(),
+      today: d === todayDay ? true : false,
+      index: d,
+    };
+    weekdays.push(obj);
+    // weeks.current[i] = obj;
+  });
+
+  // console.log(weekdays.slice(7 * 0, 7 * 1));
+  return weekdays;
+};
+
+/////////// HOME ///////////
+const Home = () => {
+  const weekData = getDates();
+  // initialSlide={3}
+
+  return (
+    <Container>
+      {/* DATES */}
+
+      <WeekContainer>
+        <Swiper
+          index={numWeeks - 1}
+          horizontal
+          containerStyle={{
+            width: "100%",
+            height: "100%",
+            marginBottom: 30,
+          }}
+          showsButtons={false}
+          showsPagination={false}
+          slidesPerView={1}
+        >
+          {numWeeksArray.map((_, i) => (
+            <EachWeek
+              data={weekData.slice(7 * i, 7 * (i + 1))}
+              key={"week" + i}
+            />
+          ))}
+        </Swiper>
+      </WeekContainer>
+
+      {/* TICKLES */}
+      <TicklesContainer>
+        <View>
+          <TicklesHed>Probiotics</TicklesHed>
+          <Tickles
+            horizontal
+            data={weekData.slice(0, 7)}
+            keyExtractor={(item) => item.date + ""}
+            contentContainerStyle={{
+              flex: 1,
+              justifyContent: "space-between",
+              marginHorizontal: marginH,
+              marginVertical: 10,
+            }}
+            renderItem={({ item }) => <Tickle />}
+          />
+        </View>
+      </TicklesContainer>
+    </Container>
+  );
+};
+
+export default Home;
