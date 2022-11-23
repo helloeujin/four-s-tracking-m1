@@ -291,7 +291,7 @@ PODS:
     - React-perflogger (= 0.64.3)
   - RNGestureHandler (2.1.3):
     - React-Core
-  - RNReanimated (2.3.3):
+  - RNReanimated (2.13.0):
     - DoubleConversion
     - FBLazyVector
     - FBReactNativeSpec
@@ -299,7 +299,6 @@ PODS:
     - RCT-Folly
     - RCTRequired
     - RCTTypeSafety
-    - React
     - React-callinvoker
     - React-Core
     - React-Core/DevSupport
@@ -497,7 +496,7 @@ SPEC CHECKSUMS:
   React-runtimeexecutor: 493d9abb8b23c3f84e19ae221eeba92cadcb70dc
   ReactCommon: 8fea6422328e2fc093e25c9fac67adbcf0f04fb4
   RNGestureHandler: e1099204721a17a89c81fcd1cc2e92143dc040fb
-  RNReanimated: 0e5ef4a7e4e79f84efbe5b40771c31044c51e7d0
+  RNReanimated: e164e3683722a8fd34f116d30ea8ba010660d3f0
   RNScreens: d6da2b9e29cf523832c2542f47bf1287318b1868
   Yoga: e6ecf3fa25af9d4c87e94ad7d5d292eedef49749
 

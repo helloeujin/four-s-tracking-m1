@@ -31,12 +31,12 @@ const Tabs = () => {
   const navigation = useNavigation();
 
   const goToProfile = () => {
-    navigation.navigate("Stack", {
-      screen: "Profile",
-      // params: {
-      //   ...fullData,
-      // },
-    });
+    // navigation.navigate("Drawer", {
+    //   screen: "Profile",
+    //   // params: {
+    //   //   ...fullData,
+    //   // },
+    // });
   };
 
   return (

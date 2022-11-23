@@ -5,7 +5,7 @@ import Swiper from "react-native-swiper";
 import EachWeek from "../components/EachWeek";
 
 const marginH = 8;
-const numWeeks = 3;
+const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
 
 const Container = styled.View`
@@ -64,15 +64,13 @@ const getDates = () => {
     weekdays.push(obj);
     // weeks.current[i] = obj;
   });
-
-  // console.log(weekdays.slice(7 * 0, 7 * 1));
+  // console.log(weekdays);
   return weekdays;
 };
 
 /////////// HOME ///////////
 const Home = () => {
   const weekData = getDates();
-  // initialSlide={3}
 
   return (
     <Container>
