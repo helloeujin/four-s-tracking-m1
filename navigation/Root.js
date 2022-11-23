@@ -1,23 +1,30 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { createDrawerNavigator } from "@react-navigation/drawer";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 import Tabs from "./Tabs";
 import Stack from "./Stack";
-import Profile from "../screens/Profile";
+import Drawer from "./Drawer";
+import Home from "../screens/Home";
 
-const Nav = createNativeStackNavigator();
-// const Nav = createDrawerNavigator();
+// const Nav = createNativeStackNavigator();
+const Nav = createDrawerNavigator();
 
 const Root = () => (
   <Nav.Navigator
+    // initialRouteName="Profile"
+    useLegacyImplementation={true}
     screenOptions={{
-      // presentation: "modal",
       headerShown: false,
     }}
   >
-    <Nav.Screen name="Tabs" component={Tabs} />
-    {/* <Nav.Screen name="Profile" component={Profile} /> */}
+    <Nav.Screen name="Home" component={Tabs} />
+    <Nav.Screen name="Stack" component={Stack} />
   </Nav.Navigator>
 );
 
 export default Root;
+
+// screenOptions={{
+//   // presentation: "modal",
+//   headerShown: false,
+// }}

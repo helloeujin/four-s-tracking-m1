@@ -1,18 +1,9 @@
 import React, { useCallback } from "react";
-import {
-  View,
-  Text,
-  useColorScheme,
-  Button,
-  Pressable,
-  TouchableOpacity,
-} from "react-native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Share from "../screens/Share";
 import Stat from "../screens/Stat";
-import { useNavigation } from "@react-navigation/native";
-
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 
@@ -31,7 +22,12 @@ const Tabs = () => {
   const navigation = useNavigation();
 
   const goToProfile = () => {
-    // navigation.navigate("Drawer", {
+    navigation.dispatch(DrawerActions.openDrawer());
+  };
+
+  const goToAdd = () => {
+    alert("pressed");
+    // navigation.navigate("Stack", {
     //   screen: "Profile",
     //   // params: {
     //   //   ...fullData,
@@ -49,17 +45,9 @@ const Tabs = () => {
             <Feather name="home" color={color} size={size} />
           ),
           // headerShown: false,
-          headerStyle: {
-            // backgroundColor: "#f4511e",
-            // height: 78,
-          },
           headerShadowVisible: false,
-          headerTitleStyle: {
-            // fontWeight: "bold",
-            // fontSize: 40,
-          },
           headerRight: () => (
-            <AddBttn onPress={() => alert("pressed")}>
+            <AddBttn onPress={goToAdd}>
               <Ionicons name="md-add-outline" size={22} color="black" />
             </AddBttn>
           ),
@@ -80,11 +68,6 @@ const Tabs = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="md-stats-chart" color={color} size={size} />
           ),
-          headerStyle: {
-            // backgroundColor: "#f4511e",
-            // height: 78,
-          },
-          // headerShown: false,
           tabBarShowLabel: false,
         }}
       />
@@ -96,11 +79,6 @@ const Tabs = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="md-people-outline" color={color} size={size} />
           ),
-          headerStyle: {
-            // backgroundColor: "#f4511e",
-            // height: 78,
-          },
-          // headerShown: false,
           tabBarShowLabel: false,
         }}
       />
