@@ -26,13 +26,13 @@ const Tabs = () => {
   };
 
   const goToAdd = () => {
-    alert("pressed");
-    // navigation.navigate("Stack", {
-    //   screen: "Profile",
-    //   // params: {
-    //   //   ...fullData,
-    //   // },
-    // });
+    // alert("pressed");
+    navigation.navigate("Stack", {
+      screen: "Profile",
+      // params: {
+      //   ...fullData,
+      // },
+    });
   };
 
   return (

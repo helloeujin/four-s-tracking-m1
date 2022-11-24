@@ -18,32 +18,33 @@ const CustomDrawerContent = (props) => {
   const newState = { ...state };
   newState.routes = newState.routes.filter((item) => item.name !== "Stack");
 
-  // FILTER OUT STACK NAV ON DRAWER ITEM
   return (
     <DrawerContentScrollView {...props}>
-      {/* <DrawerItemList {...props} /> */}
-      <DrawerItemList state={newState} {...rest} />
+      <DrawerItemList {...props} />
+      {/* <DrawerItemList state={newState} {...rest} /> */}
     </DrawerContentScrollView>
   );
 };
 
 const Root = () => (
   <Nav.Navigator
-    // initialRouteName="Profile"
+    initialRouteName="Home"
     useLegacyImplementation={true}
     drawerContent={(props) => <CustomDrawerContent {...props} />}
     screenOptions={{
       headerShown: false,
+      presentation: "modal",
     }}
   >
     <Nav.Screen name="Home" component={Tabs} />
-    <Nav.Screen name="Stack" component={Stack} />
+    <Nav.Screen
+      name="Stack"
+      component={Stack}
+      options={{
+        drawerItemStyle: { display: "none" },
+      }}
+    />
   </Nav.Navigator>
 );
 
 export default Root;
-
-// screenOptions={{
-//   // presentation: "modal",
-//   headerShown: false,
-// }}
