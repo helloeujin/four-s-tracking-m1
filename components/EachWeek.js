@@ -23,13 +23,16 @@ const DateTxt = styled.Text`
   padding: 13.5px;
 `;
 
-const EachWeek = ({ data }) => {
+const Eachweek = ({ data }) => {
   //   console.log(data);
   return (
     <DatesView>
       {data.map((item, i) => {
         return (
-          <OneDay style={{ backgroundColor: item.today ? "#f7f7f7" : "#fff" }}>
+          <OneDay
+            key={"oneday" + i}
+            style={{ backgroundColor: item.today ? "#f7f7f7" : "#fff" }}
+          >
             <DayTxt style={{ fontWeight: item.today ? "700" : "400" }}>
               {item.day}
             </DayTxt>
@@ -43,4 +46,4 @@ const EachWeek = ({ data }) => {
   );
 };
 
-export default EachWeek;
+export default Eachweek;

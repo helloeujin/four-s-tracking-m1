@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { View, Text, FlatList, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
-import EachWeek from "../components/EachWeek";
+import Eachweek from "../components/Eachweek";
 
 const marginH = 8;
 const numWeeks = 4;
@@ -89,12 +89,14 @@ const Home = () => {
           showsPagination={false}
           slidesPerView={1}
         >
-          {numWeeksArray.map((_, i) => (
-            <EachWeek
-              data={weekData.slice(7 * i, 7 * (i + 1))}
-              key={"week" + i}
-            />
-          ))}
+          {numWeeksArray.map((_, i) => {
+            return (
+              <Eachweek
+                key={"week" + i}
+                data={weekData.slice(7 * i, 7 * (i + 1))}
+              />
+            );
+          })}
         </Swiper>
       </WeekContainer>
 
