@@ -5,35 +5,23 @@ import {
   DrawerItemList,
 } from "@react-navigation/drawer";
 import Profile from "../screens/Profile";
+import Tabs from "./Tabs";
 
 const DrawerNav = createDrawerNavigator();
-
-const CustomDrawerContent = (props) => {
-  const { state, ...rest } = props;
-  const newState = { ...state };
-  newState.routes = newState.routes.filter((item) => item.name !== "Stack");
-
-  // console.log(newState.ourtes);
-
-  return (
-    <DrawerContentScrollView {...props}>
-      {/* <DrawerItemList {...props} /> */}
-      <DrawerItemList state={newState} {...rest} />
-    </DrawerContentScrollView>
-  );
-};
 
 const Drawer = () => {
   return (
     <DrawerNav.Navigator
       initialRouteName="Profile"
       useLegacyImplementation={true}
-      drawerContent={(props) => <CustomDrawerContent {...props} />}
+      screenOptions={{
+        headerShown: false,
+      }}
     >
       <DrawerNav.Screen
-        name="Profile"
-        component={Profile}
-        options={{ drawerLabel: "Profile" }}
+        name="Home"
+        component={Tabs}
+        options={{ drawerLabel: "Home" }}
       />
     </DrawerNav.Navigator>
   );

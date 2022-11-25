@@ -7,36 +7,20 @@ import {
 } from "@react-navigation/drawer";
 import Tabs from "./Tabs";
 import Stack from "./Stack";
-// import Drawer from "./Drawer";
 import Home from "../screens/Home";
+import Drawer from "./Drawer";
 
-// const Nav = createNativeStackNavigator();
-const Nav = createDrawerNavigator();
-
-const CustomDrawerContent = (props) => {
-  const { state, ...rest } = props;
-  const newState = { ...state };
-  newState.routes = newState.routes.filter((item) => item.name !== "Stack");
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <DrawerItemList {...props} />
-      {/* <DrawerItemList state={newState} {...rest} /> */}
-    </DrawerContentScrollView>
-  );
-};
+const Nav = createNativeStackNavigator();
 
 const Root = () => (
   <Nav.Navigator
-    initialRouteName="Home"
+    initialRouteName="Drawer"
     useLegacyImplementation={true}
-    drawerContent={(props) => <CustomDrawerContent {...props} />}
     screenOptions={{
       headerShown: false,
       presentation: "modal",
     }}
   >
-    <Nav.Screen name="Home" component={Tabs} />
     <Nav.Screen
       name="Stack"
       component={Stack}
@@ -44,6 +28,7 @@ const Root = () => (
         drawerItemStyle: { display: "none" },
       }}
     />
+    <Nav.Screen name="Drawer" component={Drawer} />
   </Nav.Navigator>
 );
 

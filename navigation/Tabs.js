@@ -1,11 +1,20 @@
 import React, { useCallback } from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import {
+  BottomTabBar,
+  createBottomTabNavigator,
+} from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Share from "../screens/Share";
 import Stat from "../screens/Stat";
-import { useNavigation, DrawerActions } from "@react-navigation/native";
+import {
+  useNavigation,
+  DrawerActions,
+  CommonActions,
+  StackActions,
+} from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
+// import Stack from "./Stack";
 
 const AddBttn = styled.TouchableOpacity`
   padding-right: 15px;
@@ -25,13 +34,9 @@ const Tabs = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  const goToAdd = () => {
-    // alert("pressed");
+  const goToAdd = (e) => {
     navigation.navigate("Stack", {
       screen: "Profile",
-      // params: {
-      //   ...fullData,
-      // },
     });
   };
 
@@ -47,7 +52,7 @@ const Tabs = () => {
           // headerShown: false,
           headerShadowVisible: false,
           headerRight: () => (
-            <AddBttn onPress={goToAdd}>
+            <AddBttn onPress={(e) => goToAdd(e)}>
               <Ionicons name="md-add-outline" size={22} color="black" />
             </AddBttn>
           ),
@@ -59,7 +64,6 @@ const Tabs = () => {
           tabBarShowLabel: false,
         }}
       />
-
       <Tab.Screen
         name="Stat"
         component={Stat}
@@ -71,7 +75,6 @@ const Tabs = () => {
           tabBarShowLabel: false,
         }}
       />
-
       <Tab.Screen
         name="Share"
         component={Share}
