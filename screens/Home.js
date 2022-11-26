@@ -115,7 +115,7 @@ const Home = () => {
 
       {/* TICKLES */}
       <TicklesContainer>
-        <TicklesHed>Probiotics</TicklesHed>
+        <TicklesHed>{testData.name}</TicklesHed>
         <Swiper
           index={numWeeks - 1}
           horizontal
