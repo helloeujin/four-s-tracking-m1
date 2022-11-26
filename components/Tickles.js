@@ -8,9 +8,9 @@ const TicklesView = styled.View`
   margin: 0px 8px;
 `;
 const Tickle = styled.View`
-  width: 43px;
-  height: 43px;
-  border-radius: 43px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
 `;
 
 const Tickles = ({ dates, data }) => {

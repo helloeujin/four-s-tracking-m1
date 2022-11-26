@@ -31,7 +31,7 @@ const Eachweek = ({ dates }) => {
         return (
           <OneDay
             key={"oneday" + i}
-            style={{ backgroundColor: item.today ? "#f7f7f7" : "#fff" }}
+            style={{ backgroundColor: item.today ? "#f4f4f4" : "#fff" }}
           >
             <DayTxt style={{ fontWeight: item.today ? "700" : "400" }}>
               {item.day}

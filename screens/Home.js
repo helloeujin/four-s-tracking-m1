@@ -17,7 +17,7 @@ const Container = styled.View`
 `;
 
 const WeekContainer = styled.View`
-  flex: 2;
+  flex: 1.8;
   margin-top: 30px;
 `;
 
@@ -63,9 +63,22 @@ const getDates = () => {
   return weekdays;
 };
 
+const getIndex = (index, oldIndex) => {
+  if (index > 1 && oldIndex === 0) {
+    return -1;
+  } else if (index === 0 && oldIndex > 1) {
+    return 1;
+  } else {
+    return index > oldIndex ? 1 : -1;
+  }
+};
+
 /////////// HOME ///////////
 const Home = () => {
   const weekData = getDates();
+  // const [oldIndex, setOldIndex] = useState(numWeeks - 1);
+  const oldIndex = useRef(numWeeks - 1);
+  const ticklesRef = useRef(null);
 
   return (
     <Container>
@@ -83,6 +96,11 @@ const Home = () => {
           showsButtons={false}
           showsPagination={false}
           slidesPerView={1}
+          onIndexChanged={(index) => {
+            const relativeIndex = getIndex(index, oldIndex.current);
+            ticklesRef.current.scrollBy(relativeIndex, true);
+            oldIndex.current = index;
+          }}
         >
           {numWeeksArray.map((_, i) => {
             return (
@@ -110,6 +128,7 @@ const Home = () => {
           showsPagination={false}
           slidesPerView={1}
           scrollEnabled={false}
+          ref={ticklesRef}
         >
           {numWeeksArray.map((_, i) => {
             return (
