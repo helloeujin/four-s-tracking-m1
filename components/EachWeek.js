@@ -6,6 +6,7 @@ const DatesView = styled.View`
   flex: 1;
   flex-direction: row;
   justify-content: space-between;
+  margin: 0px 8px;
 `;
 const OneDay = styled.View`
   background-color: #f7f7f7;
@@ -23,11 +24,10 @@ const DateTxt = styled.Text`
   padding: 13.5px;
 `;
 
-const Eachweek = ({ data }) => {
-  //   console.log(data);
+const Eachweek = ({ dates }) => {
   return (
     <DatesView>
-      {data.map((item, i) => {
+      {dates.map((item, i) => {
         return (
           <OneDay
             key={"oneday" + i}

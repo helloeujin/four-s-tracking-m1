@@ -1,13 +1,6 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import {
-  createDrawerNavigator,
-  DrawerContentScrollView,
-  DrawerItemList,
-} from "@react-navigation/drawer";
-import Tabs from "./Tabs";
 import Stack from "./Stack";
-import Home from "../screens/Home";
 import Drawer from "./Drawer";
 
 const Nav = createNativeStackNavigator();

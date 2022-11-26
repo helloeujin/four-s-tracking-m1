@@ -3,6 +3,10 @@ import { View, Text, FlatList, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
+import Tickles from "../components/Tickles";
+
+const testData = require("../data/test.json");
+// console.log(data);
 
 const marginH = 8;
 const numWeeks = 4;
@@ -22,20 +26,13 @@ const TicklesContainer = styled.View`
   flex: 9;
   margin-left: ${marginH}px;
   margin-right: ${marginH}px;
-  margin-top: 25px;
+  margin-top: 15px;
 `;
 
 const TicklesHed = styled.Text`
   font-size: 15px;
   margin-left: 33px;
-`;
-
-const Tickles = styled.FlatList``;
-const Tickle = styled.View`
-  width: 43px;
-  height: 43px;
-  border-radius: 43px;
-  background-color: #f7f7f7;
+  margin-bottom: 12px;
 `;
 
 const { height: SCREEN_HEIGHT } = Dimensions.get("window");
@@ -56,7 +53,7 @@ const getDates = () => {
 
     const obj = {
       day: weekDay[((d % 7) + 7) % 7],
-      dateFull: newDay,
+      dateFull: newDay.toLocaleDateString("en-US"),
       date: newDay.getDate(),
       today: d === todayDay ? true : false,
       index: d,
@@ -64,7 +61,6 @@ const getDates = () => {
     weekdays.push(obj);
     // weeks.current[i] = obj;
   });
-  // console.log(weekdays);
   return weekdays;
 };
 
@@ -93,7 +89,7 @@ const Home = () => {
             return (
               <Eachweek
                 key={"week" + i}
-                data={weekData.slice(7 * i, 7 * (i + 1))}
+                dates={weekData.slice(7 * i, 7 * (i + 1))}
               />
             );
           })}
@@ -102,21 +98,29 @@ const Home = () => {
 
       {/* TICKLES */}
       <TicklesContainer>
-        <View>
-          <TicklesHed>Probiotics</TicklesHed>
-          <Tickles
-            horizontal
-            data={weekData.slice(0, 7)}
-            keyExtractor={(item) => item.date + ""}
-            contentContainerStyle={{
-              flex: 1,
-              justifyContent: "space-between",
-              marginHorizontal: marginH,
-              marginVertical: 10,
-            }}
-            renderItem={({ item }) => <Tickle />}
-          />
-        </View>
+        <TicklesHed>Probiotics</TicklesHed>
+        <Swiper
+          index={numWeeks - 1}
+          horizontal
+          containerStyle={{
+            width: "100%",
+            height: "100%",
+            marginBottom: 30,
+          }}
+          showsButtons={false}
+          showsPagination={false}
+          slidesPerView={1}
+        >
+          {numWeeksArray.map((_, i) => {
+            return (
+              <Tickles
+                dates={weekData.slice(7 * i, 7 * (i + 1))}
+                data={testData}
+                key={"tickle" + i}
+              />
+            );
+          })}
+        </Swiper>
       </TicklesContainer>
     </Container>
   );
