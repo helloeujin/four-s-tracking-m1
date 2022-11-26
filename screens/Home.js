@@ -6,7 +6,6 @@ import Eachweek from "../components/Eachweek";
 import Tickles from "../components/Tickles";
 
 const testData = require("../data/test.json");
-// console.log(data);
 
 const marginH = 8;
 const numWeeks = 4;
@@ -110,6 +109,7 @@ const Home = () => {
           showsButtons={false}
           showsPagination={false}
           slidesPerView={1}
+          scrollEnabled={false}
         >
           {numWeeksArray.map((_, i) => {
             return (
