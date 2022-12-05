@@ -4,6 +4,7 @@ import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
 import Tickles from "../components/Tickles";
+import Ticklesbox from "../components/Ticklesbox";
 
 const testData = require("../data/test.json");
 
@@ -15,26 +16,12 @@ const Container = styled.View`
   flex: 1;
   background-color: white;
 `;
-
 const WeekContainer = styled.View`
   flex: 1.8;
   margin-top: 30px;
 `;
 
-const TicklesContainer = styled.View`
-  flex: 9;
-  margin-left: ${marginH}px;
-  margin-right: ${marginH}px;
-  margin-top: 15px;
-`;
-
-const TicklesHed = styled.Text`
-  font-size: 15px;
-  margin-left: 33px;
-  margin-bottom: 12px;
-`;
-
-const { height: SCREEN_HEIGHT } = Dimensions.get("window");
+// const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
 const getDates = () => {
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -76,9 +63,8 @@ const getIndex = (index, oldIndex) => {
 /////////// HOME ///////////
 const Home = () => {
   const weekData = getDates();
-  // const [oldIndex, setOldIndex] = useState(numWeeks - 1);
   const oldIndex = useRef(numWeeks - 1);
-  const ticklesRef = useRef(null);
+  const tickleSwiper = useRef(null);
 
   return (
     <Container>
@@ -96,9 +82,10 @@ const Home = () => {
           showsButtons={false}
           showsPagination={false}
           slidesPerView={1}
+          // loadMinimal={true}
           onIndexChanged={(index) => {
             const relativeIndex = getIndex(index, oldIndex.current);
-            ticklesRef.current.scrollBy(relativeIndex, true);
+            tickleSwiper.current.scrollBy(relativeIndex, true);
             oldIndex.current = index;
           }}
         >
@@ -114,33 +101,14 @@ const Home = () => {
       </WeekContainer>
 
       {/* TICKLES */}
-      <TicklesContainer>
-        <TicklesHed>{testData.name}</TicklesHed>
-        <Swiper
-          index={numWeeks - 1}
-          horizontal
-          containerStyle={{
-            width: "100%",
-            height: "100%",
-            marginBottom: 30,
-          }}
-          showsButtons={false}
-          showsPagination={false}
-          slidesPerView={1}
-          scrollEnabled={false}
-          ref={ticklesRef}
-        >
-          {numWeeksArray.map((_, i) => {
-            return (
-              <Tickles
-                dates={weekData.slice(7 * i, 7 * (i + 1))}
-                data={testData}
-                key={"tickle" + i}
-              />
-            );
-          })}
-        </Swiper>
-      </TicklesContainer>
+
+      <Ticklesbox
+        weekData={weekData}
+        ticklesData={testData}
+        numWeeks={numWeeks}
+        numWeeksArray={numWeeksArray}
+        tickleSwiper={tickleSwiper}
+      />
     </Container>
   );
 };

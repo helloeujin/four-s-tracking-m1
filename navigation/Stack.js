@@ -13,9 +13,9 @@ const Stack = () => {
         <StackNav.Screen
           name="Profile"
           component={Profile}
-          options={{
-            presentation: "modal",
-          }}
+          // options={{
+          //   presentation: "transparentModal",
+          // }}
         />
       </StackNav.Group>
     </StackNav.Navigator>

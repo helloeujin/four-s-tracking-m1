@@ -17,9 +17,9 @@ const Root = () => (
     <Nav.Screen
       name="Stack"
       component={Stack}
-      options={{
-        drawerItemStyle: { display: "none" },
-      }}
+      // options={{
+      //   drawerItemStyle: { display: "none" },
+      // }}
     />
     <Nav.Screen name="Drawer" component={Drawer} />
   </Nav.Navigator>
