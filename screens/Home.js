@@ -3,14 +3,13 @@ import { View, Text, FlatList, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
-import Tickles from "../components/Tickles";
 import Ticklesbox from "../components/Ticklesbox";
 
 const testData = require("../data/test.json");
 
-const marginH = 8;
 const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
+const numDataArray = [...Array(2).keys()];
 
 const Container = styled.View`
   flex: 1;
@@ -31,7 +30,6 @@ const getDates = () => {
   let weekdays = [];
   const today = new Date();
   const todayDay = today.getDay();
-
   const weekArray = [...Array(7 * numWeeks).keys()].map(
     (_, i) => i - 7 * (numWeeks - 1)
   );
@@ -68,6 +66,7 @@ const Home = () => {
   const weekData = getDates();
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwiper = useRef(null);
+  const tickleSwipersRef = useRef([]);
 
   return (
     <Container>
@@ -88,7 +87,11 @@ const Home = () => {
           // loadMinimal={true}
           onIndexChanged={(index) => {
             const relativeIndex = getIndex(index, oldIndex.current);
-            tickleSwiper.current.scrollBy(relativeIndex, true);
+            numDataArray.map((_, i) => {
+              // tickleSwiper.current.scrollBy(relativeIndex, true);
+              tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
+            });
+
             oldIndex.current = index;
           }}
         >
@@ -105,50 +108,22 @@ const Home = () => {
 
       {/* TICKLES */}
       <TicklesContainer>
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
-
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
-
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
-        <Ticklesbox
-          weekData={weekData}
-          ticklesData={testData}
-          numWeeks={numWeeks}
-          numWeeksArray={numWeeksArray}
-          tickleSwiper={tickleSwiper}
-        />
+        {numDataArray.map((_, i) => {
+          return (
+            <Ticklesbox
+              weekData={weekData}
+              ticklesData={testData}
+              numWeeks={numWeeks}
+              numWeeksArray={numWeeksArray}
+              // swiper={tickleSwiper} // WORKING
+              swiper={tickleSwipersRef}
+              swiperIndex={i}
+              // swiper={tickleSwipersRef.current[i]}
+              // swiper={(ref) => (tickleSwipersRef.current[i] = ref)}
+              key={"ticklebox" + i}
+            />
+          );
+        })}
       </TicklesContainer>
     </Container>
   );

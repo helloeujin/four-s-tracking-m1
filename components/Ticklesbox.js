@@ -22,14 +22,15 @@ const Ticklesbox = ({
   ticklesData,
   numWeeks,
   numWeeksArray,
-  tickleSwiper,
+  swiper,
+  swiperIndex,
 }) => {
   const ticklesRef = useRef(null);
-  const oldIndex = useRef(numWeeks - 1);
 
   useEffect(() => {
     if (ticklesRef.current) {
-      tickleSwiper.current = ticklesRef.current;
+      //   swiper.current = ticklesRef.current; // WORKING (for one ref)
+      swiper.current[swiperIndex] = ticklesRef.current;
     }
   }, [ticklesRef]);
 
@@ -49,6 +50,7 @@ const Ticklesbox = ({
         showsPagination={false}
         slidesPerView={1}
         scrollEnabled={false}
+        // ref={ticklesRef} // WORKING
         ref={ticklesRef}
       >
         {numWeeksArray.map((_, i) => {
