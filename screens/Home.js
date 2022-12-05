@@ -20,6 +20,9 @@ const WeekContainer = styled.View`
   flex: 1.8;
   margin-top: 30px;
 `;
+const TicklesContainer = styled.ScrollView`
+  flex: 9;
+`;
 
 // const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
@@ -101,14 +104,52 @@ const Home = () => {
       </WeekContainer>
 
       {/* TICKLES */}
+      <TicklesContainer>
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
 
-      <Ticklesbox
-        weekData={weekData}
-        ticklesData={testData}
-        numWeeks={numWeeks}
-        numWeeksArray={numWeeksArray}
-        tickleSwiper={tickleSwiper}
-      />
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
+
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
+        <Ticklesbox
+          weekData={weekData}
+          ticklesData={testData}
+          numWeeks={numWeeks}
+          numWeeksArray={numWeeksArray}
+          tickleSwiper={tickleSwiper}
+        />
+      </TicklesContainer>
     </Container>
   );
 };

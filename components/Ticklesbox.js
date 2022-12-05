@@ -3,11 +3,11 @@ import Swiper from "react-native-swiper";
 import styled from "styled-components/native";
 import Tickles from "./Tickles";
 
-const TicklesContainer = styled.View`
-  flex: 9;
+const Container = styled.View`
   margin-left: 8px;
   margin-right: 8px;
   margin-top: 15px;
+  height: 100px;
 `;
 
 const TicklesHed = styled.Text`
@@ -35,7 +35,7 @@ const Ticklesbox = ({
 
   //////////////////
   return (
-    <TicklesContainer>
+    <Container>
       <TicklesHed>{ticklesData.name}</TicklesHed>
       <Swiper
         index={numWeeks - 1}
@@ -61,7 +61,7 @@ const Ticklesbox = ({
           );
         })}
       </Swiper>
-    </TicklesContainer>
+    </Container>
   );
 };
 
