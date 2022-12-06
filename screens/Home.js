@@ -1,38 +1,53 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
 import Ticklesbox from "../components/Ticklesbox";
 import { getDates, getSlideIndex } from "../functions/datafn";
 
-const testData = require("../data/test.json");
+// const testData = require("../data/test.json");
+// const numDataArray = [...Array(8).keys()]; // for testing
 const testData2 = require("../data/test2.json");
-
 const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
-// const numDataArray = [...Array(8).keys()];
 
 const Container = styled.View`
   flex: 1;
   background-color: white;
 `;
 const WeekContainer = styled.View`
-  flex: 1.8;
+  flex: 1.9;
   margin-top: 30px;
 `;
 const TicklesContainer = styled.ScrollView`
   flex: 9;
 `;
 
-// const { height: SCREEN_HEIGHT } = Dimensions.get("window");
-
 /////////// HOME ///////////
 const Home = () => {
   const weekData = getDates(numWeeks);
   const oldIndex = useRef(numWeeks - 1);
-  // const tickleSwiper = useRef(null);
   const tickleSwipersRef = useRef([]);
+  const [projectData, setProjectData] = useState(null);
 
+  // Initialization
+  useEffect(() => {
+    if (testData2) {
+      setProjectData(testData2);
+    }
+  }, []);
+
+  const updateProjectData = (taskName, newData) => {
+    const newProjectData = projectData;
+    newProjectData[taskName] = newData;
+    setProjectData([...newProjectData]);
+  };
+
+  // useEffect(() => {
+  //   console.log("project data updated");
+  // }, [projectData]);
+
+  // Redering
   return (
     <Container>
       {/* DATES */}
@@ -50,11 +65,9 @@ const Home = () => {
           slidesPerView={1}
           onIndexChanged={(index) => {
             const relativeIndex = getSlideIndex(index, oldIndex.current);
-            testData2.map((_, i) => {
-              // tickleSwiper.current.scrollBy(relativeIndex, true);
+            projectData.map((_, i) => {
               tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
             });
-
             oldIndex.current = index;
           }}
         >
@@ -71,17 +84,18 @@ const Home = () => {
 
       {/* TICKLES */}
       <TicklesContainer>
-        {testData2.map((d, i) => {
+        {projectData?.map((eachData, i) => {
           return (
             <Ticklesbox
               weekData={weekData}
-              ticklesData={d}
+              ticklesData={eachData}
               numWeeks={numWeeks}
               numWeeksArray={numWeeksArray}
               // swiper={tickleSwiper} // WORKING
               swiper={tickleSwipersRef}
               swiperIndex={i}
               key={"ticklebox" + i}
+              updateProjectData={updateProjectData}
             />
           );
         })}

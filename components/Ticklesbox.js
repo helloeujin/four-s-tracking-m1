@@ -24,12 +24,13 @@ const Ticklesbox = ({
   numWeeksArray,
   swiper,
   swiperIndex,
+  updateProjectData,
 }) => {
   const ticklesRef = useRef(null);
 
+  // Set up swiper with useRef
   useEffect(() => {
     if (ticklesRef.current) {
-      //   swiper.current = ticklesRef.current; // WORKING (for one ref)
       swiper.current[swiperIndex] = ticklesRef.current;
     }
   }, [ticklesRef]);
@@ -59,6 +60,7 @@ const Ticklesbox = ({
               dates={weekData.slice(7 * i, 7 * (i + 1))}
               data={ticklesData}
               key={"tickle" + i}
+              updateProjectData={updateProjectData}
             />
           );
         })}
