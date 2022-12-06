@@ -1,0 +1,116 @@
+[
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Probiotics",
+    "data": [
+      {
+        "date": "12/5/2022",
+        "complete": true
+      },
+      {
+        "date": "11/27/2022",
+        "complete": true
+      },
+      {
+        "date": "11/19/2022",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Workout",
+    "data": [
+      {
+        "date": "12/6/2022",
+        "complete": true
+      },
+      {
+        "date": "12/1/2022",
+        "complete": true
+      },
+      {
+        "date": "11/18/2022",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Meditation",
+    "data": [
+      {
+        "date": "12/4/2022",
+        "complete": true
+      },
+      {
+        "date": "11/28/2022",
+        "complete": true
+      },
+      {
+        "date": "11/15/2022",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Journaling",
+    "data": [
+      {
+        "date": "12/4/2022",
+        "complete": true
+      },
+      {
+        "date": "11/25/2022",
+        "complete": true
+      },
+      {
+        "date": "11/16/2022",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Morning routine",
+    "data": [
+      {
+        "date": "12/4/2022",
+        "complete": true
+      },
+      {
+        "date": "11/25/2022",
+        "complete": true
+      },
+      {
+        "date": "11/16/2022",
+        "complete": true
+      }
+    ]
+  },
+  {
+    "project": "My Routine",
+    "type": "one-time-complete",
+    "name": "Vitamin",
+    "data": [
+      {
+        "date": "12/6r/2022",
+        "complete": true
+      },
+      {
+        "date": "11/29/2022",
+        "complete": true
+      },
+      {
+        "date": "11/22/2022",
+        "complete": true
+      }
+    ]
+  }
+]

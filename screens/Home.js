@@ -1,15 +1,16 @@
 import React, { useEffect, useRef, useState } from "react";
-import { View, Text, FlatList, Dimensions } from "react-native";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
 import Ticklesbox from "../components/Ticklesbox";
+import { getDates, getSlideIndex } from "../functions/datafn";
 
 const testData = require("../data/test.json");
+const testData2 = require("../data/test2.json");
 
 const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
-const numDataArray = [...Array(2).keys()];
+// const numDataArray = [...Array(8).keys()];
 
 const Container = styled.View`
   flex: 1;
@@ -25,53 +26,16 @@ const TicklesContainer = styled.ScrollView`
 
 // const { height: SCREEN_HEIGHT } = Dimensions.get("window");
 
-const getDates = () => {
-  const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-  let weekdays = [];
-  const today = new Date();
-  const todayDay = today.getDay();
-  const weekArray = [...Array(7 * numWeeks).keys()].map(
-    (_, i) => i - 7 * (numWeeks - 1)
-  );
-
-  weekArray.map((d, i) => {
-    const newDay = new Date();
-    newDay.setDate(newDay.getDate() + d - todayDay);
-
-    const obj = {
-      day: weekDay[((d % 7) + 7) % 7],
-      dateFull: newDay.toLocaleDateString("en-US"),
-      date: newDay.getDate(),
-      today: d === todayDay ? true : false,
-      index: d,
-    };
-    weekdays.push(obj);
-    // weeks.current[i] = obj;
-  });
-  return weekdays;
-};
-
-const getIndex = (index, oldIndex) => {
-  if (index > 1 && oldIndex === 0) {
-    return -1;
-  } else if (index === 0 && oldIndex > 1) {
-    return 1;
-  } else {
-    return index > oldIndex ? 1 : -1;
-  }
-};
-
 /////////// HOME ///////////
 const Home = () => {
-  const weekData = getDates();
+  const weekData = getDates(numWeeks);
   const oldIndex = useRef(numWeeks - 1);
-  const tickleSwiper = useRef(null);
+  // const tickleSwiper = useRef(null);
   const tickleSwipersRef = useRef([]);
 
   return (
     <Container>
       {/* DATES */}
-
       <WeekContainer>
         <Swiper
           index={numWeeks - 1}
@@ -84,10 +48,9 @@ const Home = () => {
           showsButtons={false}
           showsPagination={false}
           slidesPerView={1}
-          // loadMinimal={true}
           onIndexChanged={(index) => {
-            const relativeIndex = getIndex(index, oldIndex.current);
-            numDataArray.map((_, i) => {
+            const relativeIndex = getSlideIndex(index, oldIndex.current);
+            testData2.map((_, i) => {
               // tickleSwiper.current.scrollBy(relativeIndex, true);
               tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
             });
@@ -108,18 +71,16 @@ const Home = () => {
 
       {/* TICKLES */}
       <TicklesContainer>
-        {numDataArray.map((_, i) => {
+        {testData2.map((d, i) => {
           return (
             <Ticklesbox
               weekData={weekData}
-              ticklesData={testData}
+              ticklesData={d}
               numWeeks={numWeeks}
               numWeeksArray={numWeeksArray}
               // swiper={tickleSwiper} // WORKING
               swiper={tickleSwipersRef}
               swiperIndex={i}
-              // swiper={tickleSwipersRef.current[i]}
-              // swiper={(ref) => (tickleSwipersRef.current[i] = ref)}
               key={"ticklebox" + i}
             />
           );
