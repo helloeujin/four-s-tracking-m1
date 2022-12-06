@@ -25,6 +25,7 @@ const Ticklesbox = ({
   swiper,
   swiperIndex,
   updateProjectData,
+  oldIndex,
 }) => {
   const ticklesRef = useRef(null);
 
@@ -41,6 +42,7 @@ const Ticklesbox = ({
       <TicklesHed>{ticklesData.name}</TicklesHed>
       <Swiper
         index={numWeeks - 1}
+        // index={oldIndex}
         horizontal
         containerStyle={{
           width: "100%",
@@ -53,6 +55,11 @@ const Ticklesbox = ({
         scrollEnabled={false}
         // ref={ticklesRef} // WORKING
         ref={ticklesRef}
+        loop={false}
+        centerInsufficientSlides={true}
+        // onIndexChanged={(index) => {
+        //   console.log(ticklesData.name + ":" + index);
+        // }}
       >
         {numWeeksArray.map((_, i) => {
           return (

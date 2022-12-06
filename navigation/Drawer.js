@@ -21,7 +21,7 @@ const Drawer = () => {
       <DrawerNav.Screen
         name="Home"
         component={Tabs}
-        options={{ drawerLabel: "Home" }}
+        options={{ drawerLabel: "My Routine" }}
       />
     </DrawerNav.Navigator>
   );
