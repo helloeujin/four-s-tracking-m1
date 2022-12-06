@@ -41,8 +41,8 @@ const Ticklesbox = ({
     <Container>
       <TicklesHed>{ticklesData.name}</TicklesHed>
       <Swiper
-        index={numWeeks - 1}
-        // index={oldIndex}
+        // index={numWeeks - 1}
+        index={oldIndex}
         horizontal
         containerStyle={{
           width: "100%",
@@ -53,13 +53,9 @@ const Ticklesbox = ({
         showsPagination={false}
         slidesPerView={1}
         scrollEnabled={false}
-        // ref={ticklesRef} // WORKING
         ref={ticklesRef}
         loop={false}
-        centerInsufficientSlides={true}
-        // onIndexChanged={(index) => {
-        //   console.log(ticklesData.name + ":" + index);
-        // }}
+        autoplay={false}
       >
         {numWeeksArray.map((_, i) => {
           return (

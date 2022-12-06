@@ -29,7 +29,7 @@ const Home = () => {
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
   const [projectData, setProjectData] = useState(null);
-  const [currentIndex, setCurrentIndex] = useState(numWeeks - 1);
+  // const [currentIndex, setCurrentIndex] = useState(numWeeks - 1);
 
   // Initialization
   useEffect(() => {
@@ -41,13 +41,13 @@ const Home = () => {
   const updateProjectData = (taskName, newData) => {
     const newProjectData = projectData;
     newProjectData[taskName] = newData;
-    setCurrentIndex(oldIndex.current);
+    // setCurrentIndex(oldIndex.current);
     setProjectData([...newProjectData]);
   };
 
-  useEffect(() => {
-    console.log("currentIndex", currentIndex);
-  }, [currentIndex]);
+  // useEffect(() => {
+  //   console.log("currentIndex", currentIndex);
+  // }, [currentIndex]);
 
   // Redering
   return (
@@ -72,7 +72,7 @@ const Home = () => {
               tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
             });
             oldIndex.current = index;
-            console.log("//// week : " + index);
+            // console.log("//// week : " + index);
           }}
         >
           {numWeeksArray.map((_, i) => {
@@ -95,12 +95,12 @@ const Home = () => {
               ticklesData={eachData}
               numWeeks={numWeeks}
               numWeeksArray={numWeeksArray}
-              // swiper={tickleSwiper} // WORKING
               swiper={tickleSwipersRef}
               swiperIndex={i}
-              key={"ticklebox" + i}
+              // key={"ticklebox" + i}
+              key={Date.now() + i}
               updateProjectData={updateProjectData}
-              oldIndex={currentIndex}
+              oldIndex={oldIndex.current}
             />
           );
         })}
