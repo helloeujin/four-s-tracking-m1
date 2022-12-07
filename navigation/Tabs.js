@@ -1,25 +1,18 @@
-import React, { useCallback } from "react";
-import {
-  BottomTabBar,
-  createBottomTabNavigator,
-} from "@react-navigation/bottom-tabs";
+import React, { useCallback, useState } from "react";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Share from "../screens/Share";
 import Stat from "../screens/Stat";
-import {
-  useNavigation,
-  DrawerActions,
-  CommonActions,
-  StackActions,
-} from "@react-navigation/native";
+import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
-// import Stack from "./Stack";
+import Modal from "react-native-modal";
+import { View, Text, Button } from "react-native";
+import Addtask from "../screens/Addtask";
 
 const AddBttn = styled.TouchableOpacity`
   padding-right: 15px;
 `;
-
 const BurgerBttn = styled.TouchableOpacity`
   padding-left: 15px;
 `;
@@ -29,6 +22,7 @@ const Tab = createBottomTabNavigator();
 /////////////
 const Tabs = () => {
   const navigation = useNavigation();
+  const [isModalVisible, setModalVisible] = useState(false);
 
   const goToProfile = () => {
     navigation.dispatch(DrawerActions.openDrawer());
@@ -40,6 +34,11 @@ const Tabs = () => {
     });
   };
 
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
+
+  /////////////
   return (
     <Tab.Navigator initialRouteName="Home">
       <Tab.Screen
@@ -52,9 +51,19 @@ const Tabs = () => {
           // headerShown: false,
           headerShadowVisible: false,
           headerRight: () => (
-            <AddBttn onPress={(e) => goToAdd(e)}>
-              <Ionicons name="md-add-outline" size={22} color="black" />
-            </AddBttn>
+            <View>
+              <AddBttn onPress={(e) => toggleModal(e)}>
+                <Ionicons name="md-add-outline" size={22} color="black" />
+              </AddBttn>
+
+              <Modal
+                isVisible={isModalVisible}
+                backdropColor={"white"}
+                backdropOpacity={0.83}
+              >
+                <Addtask toggleModal={toggleModal} />
+              </Modal>
+            </View>
           ),
           headerLeft: () => (
             <BurgerBttn onPress={goToProfile}>
