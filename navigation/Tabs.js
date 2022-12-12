@@ -28,13 +28,14 @@ const Tabs = () => {
     navigation.dispatch(DrawerActions.openDrawer());
   };
 
-  const goToAdd = (e) => {
-    navigation.navigate("Stack", {
-      screen: "Profile",
-    });
-  };
+  // const goToAdd = (e) => {
+  //   navigation.navigate("Stack", {
+  //     screen: "Profile",
+  //   });
+  // };
 
   const toggleModal = () => {
+    // show transparent modal
     setModalVisible(!isModalVisible);
   };
 
@@ -52,14 +53,21 @@ const Tabs = () => {
           headerShadowVisible: false,
           headerRight: () => (
             <View>
+              {/* Toggle Modal */}
               <AddBttn onPress={(e) => toggleModal(e)}>
-                <Ionicons name="md-add-outline" size={22} color="black" />
+                <Ionicons name="md-add-outline" size={24} color="black" />
               </AddBttn>
 
+              {/* Modal Contents */}
               <Modal
                 isVisible={isModalVisible}
                 backdropColor={"white"}
-                backdropOpacity={0.83}
+                backdropOpacity={0.94}
+                onBackdropPress={() => setModalVisible(false)}
+                animationIn={"slideInDown"}
+                animationOut={"fadeOut"}
+                animationInTiming={380}
+                animationOutTiming={100}
               >
                 <Addtask toggleModal={toggleModal} />
               </Modal>
@@ -67,7 +75,7 @@ const Tabs = () => {
           ),
           headerLeft: () => (
             <BurgerBttn onPress={goToProfile}>
-              <Ionicons name="menu-outline" size={22} color="black" />
+              <Ionicons name="menu-outline" size={24} color="black" />
             </BurgerBttn>
           ),
           tabBarShowLabel: false,
