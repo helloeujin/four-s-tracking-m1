@@ -66,7 +66,7 @@ const Tabs = () => {
                 onBackdropPress={() => setModalVisible(false)}
                 animationIn={"slideInDown"}
                 animationOut={"fadeOut"}
-                animationInTiming={380}
+                animationInTiming={300}
                 animationOutTiming={100}
               >
                 <Addtask toggleModal={toggleModal} />

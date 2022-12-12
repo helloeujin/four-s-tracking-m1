@@ -4,6 +4,7 @@ import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
 import Ticklesbox from "../components/Ticklesbox";
 import { getDates, getSlideIndex } from "../functions/datafn";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // const testData = require("../data/test.json");
 // const numDataArray = [...Array(8).keys()]; // for testing
@@ -29,25 +30,40 @@ const Home = () => {
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
   const [projectData, setProjectData] = useState(null);
-  // const [currentIndex, setCurrentIndex] = useState(numWeeks - 1);
+  const [loadedData, setLoadedData] = useState(null);
 
-  // Initialization
-  useEffect(() => {
-    if (testData2) {
-      setProjectData(testData2);
-    }
-  }, []);
-
+  // updateProjectData
   const updateProjectData = (taskName, newData) => {
     const newProjectData = projectData;
     newProjectData[taskName] = newData;
-    // setCurrentIndex(oldIndex.current);
     setProjectData([...newProjectData]);
+    // saveData(newProjectData);
+    saveData([...newProjectData]);
   };
 
-  // useEffect(() => {
-  //   console.log("currentIndex", currentIndex);
-  // }, [currentIndex]);
+  // Working with Local Storage
+  const STORAGE_KEY = "@my_routine";
+
+  const saveData = async (toSave) => {
+    console.log(toSave);
+    try {
+      // https://react-native-async-storage.github.io/async-storage/docs/usage/
+      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+    } catch (e) {
+      // saving error
+    }
+  };
+  const loadData = async () => {
+    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    // setLoadedData(JSON.parse(s));
+    setProjectData(JSON.parse(s));
+  };
+
+  // Initialization
+  useEffect(() => {
+    // load data from local storage
+    loadData();
+  }, []);
 
   // Redering
   return (
@@ -72,7 +88,6 @@ const Home = () => {
               tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
             });
             oldIndex.current = index;
-            // console.log("//// week : " + index);
           }}
         >
           {numWeeksArray.map((_, i) => {
