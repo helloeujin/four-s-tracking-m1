@@ -1,7 +1,8 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
-import { styleProps } from "react-native-web/dist/cjs/modules/forwardedProps";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useState } from "react";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
   flex: 1;
@@ -37,16 +38,30 @@ const CreateTxt = styled.Text`
 
 const EditTitle = styled.View`
   flex: 1.5;
-  border-bottom-color: #efefef;
+  border-bottom-color: #f1f1f1;
   border-bottom-width: 1px;
   justify-content: flex-end;
+  align-items: flex-end;
 `;
-const Title = styled.Text``;
+const Title = styled.TextInput`
+  width: 100%;
+  padding-left: 20%;
+  padding-bottom: 4px;
+  font-size: 32px;
+`;
 
 const EditDesc = styled.View`
   flex: 1;
-  border-bottom-color: #efefef;
+  border-bottom-color: #f1f1f1;
   border-bottom-width: 1px;
+  flex-direction: row;
+  align-items: flex-end;
+`;
+const Desc = styled.TextInput`
+  width: 100%;
+  padding-left: 20%;
+  padding-bottom: 4px;
+  font-size: 16px;
 `;
 
 const SettingBox = styled.Text`
@@ -54,11 +69,21 @@ const SettingBox = styled.Text`
   font-size: 30px;
 `;
 
-const MultiComplete = ({ toggleModal }) => {
+const MultiComplete = ({}) => {
+  const navigation = useNavigation();
+
+  const [editingTitle, setEditingTitle] = useState();
+  const [editingDesc, setEditingDesc] = useState();
+  const onChangeEditingText = (payload) => setEditingTitle(payload);
+
+  const goBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <Container>
       <BtnBox>
-        <CancelBtn>
+        <CancelBtn onPress={goBack}>
           <CancelTxt>Cancel</CancelTxt>
         </CancelBtn>
 
@@ -68,10 +93,30 @@ const MultiComplete = ({ toggleModal }) => {
       </BtnBox>
 
       <EditTitle>
-        <Title>Untitled</Title>
+        <Title
+          returnKeyType="done"
+          onSubmitEditing={() => console.log("submitted")}
+          onChangeText={onChangeEditingText}
+          value={editingTitle}
+          placeholder={"Untitled"}
+        ></Title>
       </EditTitle>
 
-      <EditDesc></EditDesc>
+      <EditDesc>
+        <MaterialCommunityIcons
+          name="text"
+          size={20}
+          color="black"
+          style={{ flex: 1 }}
+        />
+        <Desc
+          returnKeyType="done"
+          onSubmitEditing={() => console.log("submitted")}
+          onChangeText={onChangeEditingText}
+          value={editingDesc}
+          placeholder={"Add details"}
+        />
+      </EditDesc>
 
       <SettingBox></SettingBox>
     </Container>
