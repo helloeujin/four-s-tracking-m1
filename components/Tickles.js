@@ -40,10 +40,7 @@ const Tickles = ({ dates, data, updateProjectData }) => {
       };
       newData.data.push(obj);
     }
-    // setUpdatedData(newData);
-    // setUpdatedData(null);
     updateProjectData(newData.name, newData);
-    // setProjectData(null);
   };
 
   // Rendering

@@ -1,16 +1,29 @@
 import React from "react";
 import styled from "styled-components/native";
-import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
 import { useNavigation } from "@react-navigation/native";
+import { colorList } from "../functions/datafn";
 
 const Container = styled.View`
   flex: 1;
   background-color: white;
+  justify-content: flex-start;
+`;
+const LeftCol = styled.View`
+  flex: 1.7;
+  align-items: flex-end;
+  justify-content: flex-end;
+  margin-left: auto;
+`;
+const RightCol = styled.View`
+  flex: 8;
+  padding-left: 6%;
 `;
 
+// Top Btn
 const BtnBox = styled.View`
-  flex: 0.7;
+  height: 50px;
   flex-direction: row;
   justify-content: space-between;
 `;
@@ -22,7 +35,7 @@ const CancelBtn = styled.TouchableOpacity`
 `;
 const CancelTxt = styled.Text`
   color: #aaa;
-  font-size: 15px;
+  font-size: 14px;
 `;
 const CreateBtn = styled.TouchableOpacity`
   width: 80px;
@@ -33,92 +46,120 @@ const CreateBtn = styled.TouchableOpacity`
 const CreateTxt = styled.Text`
   align-items: center;
   font-weight: bold;
-  font-size: 15px;
+  font-size: 14px;
 `;
 
+// Title
 const EditTitle = styled.View`
-  flex: 1.5;
+  height: 90px;
+  flex-direction: row;
   border-bottom-color: #f1f1f1;
   border-bottom-width: 1px;
   justify-content: flex-end;
   align-items: flex-end;
 `;
 const Title = styled.TextInput`
-  width: 100%;
-  padding-left: 20%;
   padding-bottom: 4px;
   font-size: 32px;
 `;
 
+// Settings
+const CompleteIcon = styled.View`
+  width: 32px;
+  height: 32px;
+  border-radius: 32px;
+  background-color: ${colorList.green};
+`;
+
+// Desc
 const EditDesc = styled.View`
-  flex: 1;
+  height: 60px;
   border-bottom-color: #f1f1f1;
   border-bottom-width: 1px;
   flex-direction: row;
-  align-items: flex-end;
+  align-items: center;
 `;
 const Desc = styled.TextInput`
-  width: 100%;
-  padding-left: 20%;
-  padding-bottom: 4px;
   font-size: 16px;
 `;
 
-const SettingBox = styled.Text`
-  flex: 6;
-  font-size: 30px;
-`;
+const Txt = styled.Text``;
 
+// MultiComplete
 const MultiComplete = ({}) => {
   const navigation = useNavigation();
 
   const [editingTitle, setEditingTitle] = useState();
   const [editingDesc, setEditingDesc] = useState();
-  const onChangeEditingText = (payload) => setEditingTitle(payload);
+
+  const onChangeEditingTitle = (payload) => setEditingTitle(payload);
+  const onChangeEditingDesc = (payload) => setEditingDesc(payload);
 
   const goBack = () => {
     navigation.goBack();
   };
 
+  // Return
   return (
     <Container>
       <BtnBox>
         <CancelBtn onPress={goBack}>
           <CancelTxt>Cancel</CancelTxt>
         </CancelBtn>
-
         <CreateBtn>
           <CreateTxt>Create</CreateTxt>
         </CreateBtn>
       </BtnBox>
 
       <EditTitle>
-        <Title
-          returnKeyType="done"
-          onSubmitEditing={() => console.log("submitted")}
-          onChangeText={onChangeEditingText}
-          value={editingTitle}
-          placeholder={"Untitled"}
-        ></Title>
+        <LeftCol />
+        <RightCol>
+          <Title
+            returnKeyType="done"
+            onSubmitEditing={() => console.log("submitted")}
+            onChangeText={onChangeEditingTitle}
+            value={editingTitle}
+            placeholder={"Untitled"}
+            autoComplete="off"
+            autoCorrect="off"
+          />
+        </RightCol>
       </EditTitle>
 
       <EditDesc>
-        <MaterialCommunityIcons
-          name="text"
-          size={20}
-          color="black"
-          style={{ flex: 1 }}
-        />
-        <Desc
-          returnKeyType="done"
-          onSubmitEditing={() => console.log("submitted")}
-          onChangeText={onChangeEditingText}
-          value={editingDesc}
-          placeholder={"Add details"}
-        />
+        <LeftCol>
+          <MaterialCommunityIcons name="text" size={20} color="black" />
+        </LeftCol>
+        <RightCol>
+          <Desc
+            returnKeyType="done"
+            onSubmitEditing={() => console.log("submitted")}
+            onChangeText={onChangeEditingDesc}
+            value={editingDesc}
+            placeholder={"Add details"}
+            autoComplete="off"
+            autoCorrect="off"
+          />
+        </RightCol>
       </EditDesc>
 
-      <SettingBox></SettingBox>
+      <EditDesc style={{ borderBottomColor: "white" }}>
+        <LeftCol>
+          <Feather name="check-circle" size={20} color="black" />
+        </LeftCol>
+        <RightCol>
+          <CompleteIcon />
+        </RightCol>
+      </EditDesc>
+
+      <EditDesc style={{ borderBottomColor: "white" }}>
+        <LeftCol>
+          <Ionicons name="repeat" size={23} color="black" />
+        </LeftCol>
+        <RightCol>
+          <Txt>Once a day</Txt>
+        </RightCol>
+      </EditDesc>
     </Container>
   );
 };

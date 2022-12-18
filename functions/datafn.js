@@ -39,4 +39,8 @@ const getSlideIndex = (index, oldIndex) => {
   }
 };
 
-export { getDates, getSlideIndex };
+const colorList = {
+  green: "#288E3F",
+};
+
+export { getDates, getSlideIndex, colorList };
