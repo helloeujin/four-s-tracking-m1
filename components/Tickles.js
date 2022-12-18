@@ -8,9 +8,9 @@ const TicklesView = styled.View`
   margin: 0px 8px;
 `;
 const Tickle = styled.TouchableOpacity`
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
+  width: 38px;
+  height: 38px;
+  border-radius: 38px;
 `;
 
 const Tickles = ({ dates, data, updateProjectData }) => {

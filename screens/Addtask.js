@@ -1,8 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
-import { Ionicons } from "@expo/vector-icons";
-import Modal from "react-native-modal";
-import MultiComplete from "../modules/MultiComplete";
+import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
   margin-top: 10px;
@@ -17,6 +16,7 @@ const Btnbox = styled.View`
   margin-bottom: 20px;
 `;
 const Addbtn = styled.TouchableOpacity`
+  text-align: center;
   width: 40px;
   height: 40px;
   border-radius: 40px;
@@ -30,10 +30,17 @@ const Addtxt = styled.Text`
   font-weight: 400;
 `;
 
+const Icontxt = styled.Text`
+  font-size: 13px;
+  color: white;
+  margin: auto;
+  font-weight: bold;
+`;
+
 const Gobackbtn = styled.TouchableOpacity`
-  width: 43px;
-  height: 43px;
-  border-radius: 43px;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
   background-color: #ffffff;
   box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
   margin-bottom: 22px;
@@ -46,13 +53,13 @@ const Gobackbtn = styled.TouchableOpacity`
 
 ////////
 const Addtask = ({ toggleModal }) => {
-  const [multiModalVisible, setMultiModalVisible] = useState(false);
+  const navigation = useNavigation();
 
-  const multiToggleModal = () => {
-    // show transparent modal
-    // toggleModal();
-    setMultiModalVisible(!multiModalVisible);
-    console.log("multi modal pressed");
+  const goToAddMulti = (e) => {
+    toggleModal();
+    navigation.navigate("Stack", {
+      screen: "MultiComplete",
+    });
   };
 
   return (
@@ -63,37 +70,40 @@ const Addtask = ({ toggleModal }) => {
 
       <Btnbox>
         <Addtxt>Multi-time complete</Addtxt>
-        <Addbtn onPress={multiToggleModal} />
+        {/* <Addbtn onPress={multiToggleModal} /> */}
+        <Addbtn onPress={goToAddMulti} />
       </Btnbox>
 
       <Btnbox>
         <Addtxt>Number tracking</Addtxt>
-        <Addbtn />
+        <Addbtn>
+          <Icontxt>2.0</Icontxt>
+        </Addbtn>
       </Btnbox>
 
       <Btnbox>
         <Addtxt>Time tracking</Addtxt>
-        <Addbtn />
+        <Addbtn>
+          <MaterialCommunityIcons
+            name="arrow-bottom-right"
+            size={18}
+            color="white"
+            style={{
+              marginLeft: "auto",
+              marginTop: "auto",
+              marginRight: "auto",
+              marginBottom: "auto",
+            }}
+          />
+        </Addbtn>
       </Btnbox>
 
       <Btnbox>
         <Addtxt>Text tracking</Addtxt>
-        <Addbtn></Addbtn>
+        <Addbtn>
+          <Icontxt>김</Icontxt>
+        </Addbtn>
       </Btnbox>
-
-      {/* Modal Contents */}
-      <Modal
-        isVisible={multiModalVisible}
-        backdropColor={"white"}
-        backdropOpacity={0.94}
-        onBackdropPress={() => setMultiModalVisible(false)}
-        animationIn={"slideInDown"}
-        animationOut={"fadeOut"}
-        animationInTiming={300}
-        animationOutTiming={100}
-      >
-        <MultiComplete />
-      </Modal>
     </Container>
   );
 };

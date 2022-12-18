@@ -19,13 +19,13 @@ const OneDay = styled.View`
   align-items: center;
 `;
 const DayTxt = styled.Text`
-  font-size: 10.5px;
+  font-size: 10.3px;
   align-items: center;
   color: #111;
 `;
 const DateTxt = styled.Text`
   padding: 13px;
-  font-size: 15.5px;
+  font-size: 15px;
   color: #111;
 `;
 

@@ -25,7 +25,7 @@ const WeekContainer = styled.View`
 `;
 const TicklesContainer = styled.ScrollView`
   flex: 9;
-  padding-top: 20px;
+  padding-top: 25px;
 `;
 
 /////////// HOME ///////////

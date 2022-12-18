@@ -78,8 +78,8 @@ const Drawer = () => {
         component={Tabs}
         options={{
           drawerLabel: "My Routine",
-          drawerActiveTintColor: "white",
-          drawerActiveBackgroundColor: "#333",
+          drawerActiveTintColor: "#333",
+          drawerActiveBackgroundColor: "#efefef",
         }}
       />
     </DrawerNav.Navigator>

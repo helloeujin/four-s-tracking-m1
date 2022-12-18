@@ -6,14 +6,14 @@ import Tickles from "./Tickles";
 const Container = styled.View`
   margin-left: 8px;
   margin-right: 8px;
-  margin-top: 15px;
-  height: 100px;
+  margin-top: 8px;
+  height: 98px;
 `;
 
 const TicklesHed = styled.Text`
   font-size: 14.8px;
   margin-left: 33px;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
   font-weight: normal;
   color: #222;
 `;

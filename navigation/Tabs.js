@@ -22,6 +22,7 @@ const Tab = createBottomTabNavigator();
 /////////////
 const Tabs = () => {
   const navigation = useNavigation();
+
   const [isModalVisible, setModalVisible] = useState(false);
 
   const goToProfile = () => {
