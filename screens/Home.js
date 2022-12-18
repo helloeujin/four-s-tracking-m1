@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import Eachweek from "../components/Eachweek";
@@ -8,20 +8,24 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // const testData = require("../data/test.json");
 // const numDataArray = [...Array(8).keys()]; // for testing
-const testData2 = require("../data/test2.json");
+const testData2 = require("../data/test3.json");
 const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
 
 const Container = styled.View`
+  padding-top: 12px;
   flex: 1;
   background-color: white;
 `;
 const WeekContainer = styled.View`
-  flex: 1.9;
-  margin-top: 30px;
+  flex: 1.3;
+  padding-bottom: 7px;
+  border-bottom-color: #efefef;
+  border-bottom-width: 1px;
 `;
 const TicklesContainer = styled.ScrollView`
   flex: 9;
+  padding-top: 20px;
 `;
 
 /////////// HOME ///////////
@@ -53,6 +57,7 @@ const Home = () => {
     }
   };
   const loadData = async () => {
+    // await AsyncStorage.clear(); //reset storage
     const storedData = await AsyncStorage.getItem(STORAGE_KEY);
     // setLoadedData(JSON.parse(s));
 
@@ -63,12 +68,12 @@ const Home = () => {
     }
   };
 
-  // Initialization
-  useEffect(() => {
-    console.log(projectData);
-  }, [projectData]);
+  // // Data update
+  // useEffect(() => {
+  //   console.log(projectData);
+  // }, [projectData]);
 
-  // Data update
+  // Initialization
   useEffect(() => {
     // load data from local storage
     loadData();
@@ -85,7 +90,7 @@ const Home = () => {
           containerStyle={{
             width: "100%",
             height: "100%",
-            marginBottom: 30,
+            marginBottom: 0,
           }}
           loop={false}
           showsButtons={false}

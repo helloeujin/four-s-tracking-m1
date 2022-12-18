@@ -10,18 +10,23 @@ const DatesView = styled.View`
 `;
 const OneDay = styled.View`
   background-color: #f7f7f7;
-  border: 1px solid white;
+  border: 1px solid #fff;
   align-items: center;
   justify-content: center;
-  padding-top: 10px;
+  padding-top: 12px;
   border-radius: 8px;
-`;
-const DayTxt = styled.Text`
-  font-size: 11.2px;
+  height: 100%;
   align-items: center;
 `;
+const DayTxt = styled.Text`
+  font-size: 10.5px;
+  align-items: center;
+  color: #333;
+`;
 const DateTxt = styled.Text`
-  padding: 13.5px;
+  padding: 13px;
+  font-size: 15.5px;
+  color: #333;
 `;
 
 const Eachweek = ({ dates }) => {
