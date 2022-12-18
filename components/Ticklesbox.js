@@ -11,9 +11,11 @@ const Container = styled.View`
 `;
 
 const TicklesHed = styled.Text`
-  font-size: 15px;
+  font-size: 14.8px;
   margin-left: 33px;
   margin-bottom: 12px;
+  font-weight: normal;
+  color: #222;
 `;
 
 //////////////////

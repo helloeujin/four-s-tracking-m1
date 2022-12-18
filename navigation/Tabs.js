@@ -41,7 +41,13 @@ const Tabs = () => {
 
   /////////////
   return (
-    <Tab.Navigator initialRouteName="Home">
+    <Tab.Navigator
+      initialRouteName="Home"
+      screenOptions={{
+        tabBarActiveTintColor: "#111",
+        tabBarInactiveTintColor: "#bbb",
+      }}
+    >
       <Tab.Screen
         name="My Routine"
         component={Home}

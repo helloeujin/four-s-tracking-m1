@@ -21,12 +21,12 @@ const OneDay = styled.View`
 const DayTxt = styled.Text`
   font-size: 10.5px;
   align-items: center;
-  color: #333;
+  color: #111;
 `;
 const DateTxt = styled.Text`
   padding: 13px;
   font-size: 15.5px;
-  color: #333;
+  color: #111;
 `;
 
 const Eachweek = ({ dates }) => {
