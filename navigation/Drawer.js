@@ -20,7 +20,7 @@ const ProfileContainer = styled.View`
 `;
 const ProfileName = styled.Text`
   font-size: 19px;
-  margin-left: 14px;
+  margin-left: 8px;
   font-weight: normal;
   width: 100%;
 `;
@@ -70,16 +70,7 @@ const Drawer = () => {
         headerShown: false,
         drawerStyle: {
           backgroundColor: "white",
-          // width: "100%",
         },
-        // contentOptions: {
-        //   activeTintColor: "#333",
-        // },
-        // activeTintColor: "#333",
-        // drawerActiveTintColor: "#333",
-        // activeBackgroundColor: "#333",
-        // drawerInactiveTintColor: "#333",
-        // inactiveBackgroundColor: "#fff",
       }}
     >
       <DrawerNav.Screen

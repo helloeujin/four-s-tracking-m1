@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Ionicons } from "@expo/vector-icons";
+import Modal from "react-native-modal";
+import MultiComplete from "../modules/MultiComplete";
 
 const Container = styled.View`
   margin-top: 10px;
@@ -42,7 +44,17 @@ const Gobackbtn = styled.TouchableOpacity`
   padding-top: 2px;
 `;
 
+////////
 const Addtask = ({ toggleModal }) => {
+  const [multiModalVisible, setMultiModalVisible] = useState(false);
+
+  const multiToggleModal = () => {
+    // show transparent modal
+    // toggleModal();
+    setMultiModalVisible(!multiModalVisible);
+    console.log("multi modal pressed");
+  };
+
   return (
     <Container>
       <Gobackbtn onPress={toggleModal}>
@@ -51,7 +63,7 @@ const Addtask = ({ toggleModal }) => {
 
       <Btnbox>
         <Addtxt>Multi-time complete</Addtxt>
-        <Addbtn />
+        <Addbtn onPress={multiToggleModal} />
       </Btnbox>
 
       <Btnbox>
@@ -68,6 +80,20 @@ const Addtask = ({ toggleModal }) => {
         <Addtxt>Text tracking</Addtxt>
         <Addbtn></Addbtn>
       </Btnbox>
+
+      {/* Modal Contents */}
+      <Modal
+        isVisible={multiModalVisible}
+        backdropColor={"white"}
+        backdropOpacity={0.94}
+        onBackdropPress={() => setMultiModalVisible(false)}
+        animationIn={"slideInDown"}
+        animationOut={"fadeOut"}
+        animationInTiming={300}
+        animationOutTiming={100}
+      >
+        <MultiComplete />
+      </Modal>
     </Container>
   );
 };

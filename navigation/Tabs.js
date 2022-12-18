@@ -7,7 +7,7 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import Modal from "react-native-modal";
-import { View, Text, Button } from "react-native";
+import { View } from "react-native";
 import Addtask from "../screens/Addtask";
 
 const AddBttn = styled.TouchableOpacity`
@@ -67,7 +67,7 @@ const Tabs = () => {
                 animationIn={"slideInDown"}
                 animationOut={"fadeOut"}
                 animationInTiming={300}
-                animationOutTiming={100}
+                animationOutTiming={10}
               >
                 <Addtask toggleModal={toggleModal} />
               </Modal>
