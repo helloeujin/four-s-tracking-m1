@@ -30,7 +30,6 @@ const Home = () => {
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
   const [projectData, setProjectData] = useState(null);
-  const [loadedData, setLoadedData] = useState(null);
 
   // updateProjectData
   const updateProjectData = (taskName, newData) => {
@@ -45,7 +44,7 @@ const Home = () => {
   const STORAGE_KEY = "@my_routine";
 
   const saveData = async (toSave) => {
-    console.log(toSave);
+    // console.log(toSave);
     try {
       // https://react-native-async-storage.github.io/async-storage/docs/usage/
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
@@ -54,12 +53,22 @@ const Home = () => {
     }
   };
   const loadData = async () => {
-    const s = await AsyncStorage.getItem(STORAGE_KEY);
+    const storedData = await AsyncStorage.getItem(STORAGE_KEY);
     // setLoadedData(JSON.parse(s));
-    setProjectData(JSON.parse(s));
+
+    if (storedData) {
+      setProjectData(JSON.parse(storedData));
+    } else {
+      setProjectData(testData2);
+    }
   };
 
   // Initialization
+  useEffect(() => {
+    console.log(projectData);
+  }, [projectData]);
+
+  // Data update
   useEffect(() => {
     // load data from local storage
     loadData();
@@ -84,7 +93,7 @@ const Home = () => {
           slidesPerView={1}
           onIndexChanged={(index) => {
             const relativeIndex = getSlideIndex(index, oldIndex.current);
-            projectData.map((_, i) => {
+            projectData?.map((_, i) => {
               tickleSwipersRef.current[i].scrollBy(relativeIndex, true);
             });
             oldIndex.current = index;
