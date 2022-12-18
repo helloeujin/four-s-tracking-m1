@@ -7,7 +7,11 @@ const StackNav = createStackNavigator();
 
 const Stack = () => {
   return (
-    <StackNav.Navigator>
+    <StackNav.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <StackNav.Screen name="Add " component={MultiComplete} />
     </StackNav.Navigator>
   );

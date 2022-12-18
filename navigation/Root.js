@@ -17,7 +17,6 @@ const Root = () => (
     {/* STACK */}
     <Nav.Group
       screenOptions={{
-        headerShown: false,
         presentation: "modal",
       }}
     >
