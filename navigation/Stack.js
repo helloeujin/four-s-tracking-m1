@@ -12,7 +12,7 @@ const Stack = () => {
         headerShown: false,
       }}
     >
-      <StackNav.Screen name="Add " component={MultiComplete} />
+      <StackNav.Screen name="MultiComplete" component={MultiComplete} />
     </StackNav.Navigator>
   );
 };

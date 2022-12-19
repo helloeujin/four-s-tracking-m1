@@ -88,7 +88,7 @@ const Txt = styled.Text``;
 // MultiComplete
 const MultiComplete = ({ route, navigation }) => {
   // const navigation = useNavigation();
-  console.log(route.params);
+  console.log(route.params.projectData);
 
   const [editingTitle, setEditingTitle] = useState();
   const [editingDesc, setEditingDesc] = useState();
