@@ -61,7 +61,8 @@ const Home = ({ navigation, route }) => {
   // Working with Local Storage
   const STORAGE_KEY = "@my_routine";
   const loadData = async () => {
-    // await AsyncStorage.clear(); //reset storage
+    // await AsyncStorage.clear(); //reset storage -> throw error
+    // await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove); //reset storage
     const storedData = await AsyncStorage.getItem(STORAGE_KEY);
     if (storedData) {
       setProjectData(JSON.parse(storedData));
@@ -138,6 +139,7 @@ const Home = ({ navigation, route }) => {
       {/* TICKLES */}
       <TicklesContainer>
         {projectData?.map((eachData, i) => {
+          // console.log(i);
           return (
             <Ticklesbox
               weekData={weekData}

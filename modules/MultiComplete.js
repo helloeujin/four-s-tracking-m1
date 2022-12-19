@@ -87,13 +87,9 @@ const Txt = styled.Text``;
 
 // MultiComplete
 const MultiComplete = ({ route, navigation }) => {
-  // const navigation = useNavigation();
-
   const projectData = route.params.projectData;
-  // console.log(projectData);
-
-  const [taskName, setTaskName] = useState();
-  const [desc, setDesc] = useState();
+  const [taskName, setTaskName] = useState("");
+  const [desc, setDesc] = useState("");
 
   const onChangeEditingTaskName = (payload) => setTaskName(payload);
   const onChangeDesc = (payload) => setDesc(payload);
@@ -107,27 +103,13 @@ const MultiComplete = ({ route, navigation }) => {
       project: "My Routine",
       type: "one-time-complete",
       name: taskName,
+      desc: desc,
       data: [],
     };
     projectData.push(obj);
     saveData([...projectData]);
-
     goBack();
   };
-
-  // const updateProjectData = (taskName, newData) => {
-  //   const newProjectData = projectData;
-  //   newProjectData[taskName] = newData;
-  //   saveData([...newProjectData]);
-  // };
-
-  // {
-  //   "project": "My Routine",
-  //   "type": "one-time-complete",
-  //   "name": "Probiotics",
-  //   "data": [
-  //   ]
-  // }
 
   // Return
   return (

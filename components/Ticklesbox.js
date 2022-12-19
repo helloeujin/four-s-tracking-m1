@@ -2,27 +2,38 @@ import React, { useEffect, useRef, useState } from "react";
 import Swiper from "react-native-swiper";
 import styled from "styled-components/native";
 import Tickles from "./Tickles";
+import { Entypo } from "@expo/vector-icons";
 
 const Container = styled.View`
   margin-left: 8px;
   margin-right: 8px;
-  margin-top: 8px;
-  height: 98px;
+  margin-top: 10px;
+  height: 120px;
 `;
-
+const HedContainer = styled.TouchableOpacity`
+  flex-direction: row;
+  justify-content: space-between;
+  margin-left: 28px;
+  margin-right: 8px;
+  margin-bottom: 4px;
+`;
 const TicklesHed = styled.Text`
-  font-size: 14.8px;
-  margin-left: 33px;
-  margin-bottom: 10px;
-  font-weight: normal;
+  font-size: 15.5px;
+  font-weight: 500;
   color: #222;
+`;
+const TicklesDesc = styled.Text`
+  font-size: 13px;
+  margin-bottom: 2px;
+  font-weight: normal;
+  color: #aaa;
+  margin-left: 28px;
 `;
 
 //////////////////
 const Ticklesbox = ({
   weekData,
   ticklesData,
-  numWeeks,
   numWeeksArray,
   swiper,
   swiperIndex,
@@ -41,7 +52,13 @@ const Ticklesbox = ({
   //////////////////
   return (
     <Container>
-      <TicklesHed>{ticklesData.name}</TicklesHed>
+      <HedContainer>
+        <TicklesHed>{ticklesData.name}</TicklesHed>
+        {/* <Entypo name="dots-three-vertical" size={12} color="#888" /> */}
+      </HedContainer>
+
+      {ticklesData.desc ? <TicklesDesc>{ticklesData.desc}</TicklesDesc> : null}
+
       <Swiper
         // index={numWeeks - 1}
         index={oldIndex}
@@ -49,7 +66,8 @@ const Ticklesbox = ({
         containerStyle={{
           width: "100%",
           height: "100%",
-          marginBottom: 30,
+          // marginBottom: 40,
+          marginTop: 10,
         }}
         showsButtons={false}
         showsPagination={false}

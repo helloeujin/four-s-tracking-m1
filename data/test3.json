@@ -3,6 +3,7 @@
     "project": "My Routine",
     "type": "one-time-complete",
     "name": "Probiotics",
+    "desc": "Once a day",
     "data": [
       {
         "date": "12/4/2022",
@@ -26,6 +27,7 @@
     "project": "My Routine",
     "type": "one-time-complete",
     "name": "Workout",
+    "desc": "Once a day",
     "data": [
       {
         "date": "12/6/2022",
@@ -45,6 +47,7 @@
     "project": "My Routine",
     "type": "one-time-complete",
     "name": "Meditation",
+    "desc": "",
     "data": [
       {
         "date": "12/4/2022",
