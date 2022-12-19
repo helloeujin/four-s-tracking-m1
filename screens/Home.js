@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from "react";
 import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
-import Eachweek from "../components/Eachweek";
+import EachWeek from "../components/EachWeek";
 import Ticklesbox from "../components/Ticklesbox";
 import { getDates, getSlideIndex } from "../functions/datafn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import { Feather, Ionicons } from "@expo/vector-icons";
+import { Button, View } from "react-native";
+import Modal from "react-native-modal";
+import Addtask from "../screens/Addtask";
 
-// const testData = require("../data/test.json");
 // const numDataArray = [...Array(8).keys()]; // for testing
 const testData2 = require("../data/test3.json");
 const numWeeks = 4;
@@ -27,40 +30,44 @@ const TicklesContainer = styled.ScrollView`
   flex: 9;
   padding-top: 25px;
 `;
+const AddBttn = styled.TouchableOpacity`
+  padding-right: 15px;
+`;
 
 /////////// HOME ///////////
-const Home = () => {
+const Home = ({ navigation, route }) => {
+  // console.log(route);
   const weekData = getDates(numWeeks);
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
+
   const [projectData, setProjectData] = useState(null);
+
+  /// transparent modal
+  const [isModalVisible, setModalVisible] = useState(false);
+  const toggleModal = () => {
+    setModalVisible(!isModalVisible);
+  };
 
   // updateProjectData
   const updateProjectData = (taskName, newData) => {
     const newProjectData = projectData;
     newProjectData[taskName] = newData;
     setProjectData([...newProjectData]);
-    // saveData(newProjectData);
     saveData([...newProjectData]);
   };
 
   // Working with Local Storage
   const STORAGE_KEY = "@my_routine";
-
   const saveData = async (toSave) => {
-    // console.log(toSave);
     try {
       // https://react-native-async-storage.github.io/async-storage/docs/usage/
       await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-    } catch (e) {
-      // saving error
-    }
+    } catch (e) {}
   };
   const loadData = async () => {
     // await AsyncStorage.clear(); //reset storage
     const storedData = await AsyncStorage.getItem(STORAGE_KEY);
-    // setLoadedData(JSON.parse(s));
-
     if (storedData) {
       setProjectData(JSON.parse(storedData));
     } else {
@@ -78,6 +85,19 @@ const Home = () => {
     // load data from local storage
     loadData();
   }, []);
+
+  // Get HeaderRight Event from tab (to show transparent)
+  useEffect(() => {
+    navigation.setOptions({
+      headerRight: () => (
+        <View>
+          <AddBttn onPress={toggleModal}>
+            <Ionicons name="md-add-outline" size={24} color="black" />
+          </AddBttn>
+        </View>
+      ),
+    });
+  }, [navigation]);
 
   // Redering
   return (
@@ -106,7 +126,7 @@ const Home = () => {
         >
           {numWeeksArray.map((_, i) => {
             return (
-              <Eachweek
+              <EachWeek
                 key={"week" + i}
                 dates={weekData.slice(7 * i, 7 * (i + 1))}
               />
@@ -134,6 +154,22 @@ const Home = () => {
           );
         })}
       </TicklesContainer>
+
+      <View>
+        {/* Modal Contents */}
+        <Modal
+          isVisible={isModalVisible}
+          backdropColor={"white"}
+          backdropOpacity={0.94}
+          onBackdropPress={() => setModalVisible(false)}
+          animationIn={"slideInDown"}
+          animationOut={"fadeOut"}
+          animationInTiming={320}
+          animationOutTiming={10}
+        >
+          <Addtask toggleModal={toggleModal} />
+        </Modal>
+      </View>
     </Container>
   );
 };

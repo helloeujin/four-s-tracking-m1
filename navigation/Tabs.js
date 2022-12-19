@@ -1,4 +1,4 @@
-import React, { useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../screens/Home";
 import Share from "../screens/Share";
@@ -7,7 +7,7 @@ import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
 import Modal from "react-native-modal";
-import { View } from "react-native";
+import { View, Button } from "react-native";
 import Addtask from "../screens/Addtask";
 
 const AddBttn = styled.TouchableOpacity`
@@ -23,21 +23,8 @@ const Tab = createBottomTabNavigator();
 const Tabs = () => {
   const navigation = useNavigation();
 
-  const [isModalVisible, setModalVisible] = useState(false);
-
   const goToProfile = () => {
     navigation.dispatch(DrawerActions.openDrawer());
-  };
-
-  // const goToAdd = (e) => {
-  //   navigation.navigate("Stack", {
-  //     screen: "Profile",
-  //   });
-  // };
-
-  const toggleModal = () => {
-    // show transparent modal
-    setModalVisible(!isModalVisible);
   };
 
   /////////////
@@ -56,28 +43,12 @@ const Tabs = () => {
           tabBarIcon: ({ focused, color, size }) => (
             <Feather name="home" color={color} size={size} />
           ),
-          // headerShown: false,
           headerShadowVisible: false,
           headerRight: () => (
             <View>
-              {/* Toggle Modal */}
-              <AddBttn onPress={(e) => toggleModal(e)}>
+              <AddBttn title="add task">
                 <Ionicons name="md-add-outline" size={24} color="black" />
               </AddBttn>
-
-              {/* Modal Contents */}
-              <Modal
-                isVisible={isModalVisible}
-                backdropColor={"white"}
-                backdropOpacity={0.94}
-                onBackdropPress={() => setModalVisible(false)}
-                animationIn={"slideInDown"}
-                animationOut={"fadeOut"}
-                animationInTiming={320}
-                animationOutTiming={10}
-              >
-                <Addtask toggleModal={toggleModal} />
-              </Modal>
             </View>
           ),
           headerLeft: () => (
@@ -92,7 +63,6 @@ const Tabs = () => {
         name="Stat"
         component={Stat}
         options={{
-          // tabBarBadge: 3,
           tabBarIcon: ({ focused, color, size }) => (
             <Ionicons name="md-stats-chart" color={color} size={size} />
           ),

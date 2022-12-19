@@ -121,7 +121,7 @@ const MultiComplete = ({}) => {
             value={editingTitle}
             placeholder={"Untitled"}
             autoComplete="off"
-            autoCorrect="off"
+            autoCorrect={false}
           />
         </RightCol>
       </EditTitle>
@@ -138,7 +138,7 @@ const MultiComplete = ({}) => {
             value={editingDesc}
             placeholder={"Add details"}
             autoComplete="off"
-            autoCorrect="off"
+            autoCorrect={false}
           />
         </RightCol>
       </EditDesc>

@@ -29,7 +29,7 @@ const DateTxt = styled.Text`
   color: #111;
 `;
 
-const Eachweek = ({ dates }) => {
+const EachWeek = ({ dates }) => {
   return (
     <DatesView>
       {dates.map((item, i) => {
@@ -51,4 +51,4 @@ const Eachweek = ({ dates }) => {
   );
 };
 
-export default Eachweek;
+export default EachWeek;
