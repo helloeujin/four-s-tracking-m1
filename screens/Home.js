@@ -3,7 +3,7 @@ import styled from "styled-components/native";
 import Swiper from "react-native-swiper";
 import EachWeek from "../components/EachWeek";
 import Ticklesbox from "../components/Ticklesbox";
-import { getDates, getSlideIndex } from "../functions/datafn";
+import { getDates, getSlideIndex, saveData } from "../functions/datafn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import { Button, View } from "react-native";
@@ -60,12 +60,6 @@ const Home = ({ navigation, route }) => {
 
   // Working with Local Storage
   const STORAGE_KEY = "@my_routine";
-  const saveData = async (toSave) => {
-    try {
-      // https://react-native-async-storage.github.io/async-storage/docs/usage/
-      await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
-    } catch (e) {}
-  };
   const loadData = async () => {
     // await AsyncStorage.clear(); //reset storage
     const storedData = await AsyncStorage.getItem(STORAGE_KEY);

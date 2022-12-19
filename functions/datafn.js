@@ -1,7 +1,4 @@
-// const getTestData = () => {
-//   {
-//   }
-// };
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const getDates = (numWeeks) => {
   const weekDay = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
@@ -43,4 +40,12 @@ const colorList = {
   green: "#288E3F",
 };
 
-export { getDates, getSlideIndex, colorList };
+const STORAGE_KEY = "@my_routine";
+const saveData = async (toSave) => {
+  try {
+    // https://react-native-async-storage.github.io/async-storage/docs/usage/
+    await AsyncStorage.setItem(STORAGE_KEY, JSON.stringify(toSave));
+  } catch (e) {}
+};
+
+export { getDates, getSlideIndex, colorList, saveData };

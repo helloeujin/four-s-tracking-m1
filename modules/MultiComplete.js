@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components/native";
 import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { colorList } from "../functions/datafn";
+import { colorList, saveData } from "../functions/datafn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Container = styled.View`
@@ -34,7 +34,7 @@ const CancelBtn = styled.TouchableOpacity`
   align-items: flex-end;
 `;
 const CancelTxt = styled.Text`
-  color: #aaa;
+  color: #999;
   font-size: 14px;
 `;
 const CreateBtn = styled.TouchableOpacity`
@@ -88,21 +88,46 @@ const Txt = styled.Text``;
 // MultiComplete
 const MultiComplete = ({ route, navigation }) => {
   // const navigation = useNavigation();
-  console.log(route.params.projectData);
 
-  const [editingTitle, setEditingTitle] = useState();
-  const [editingDesc, setEditingDesc] = useState();
+  const projectData = route.params.projectData;
+  // console.log(projectData);
 
-  const onChangeEditingTitle = (payload) => setEditingTitle(payload);
-  const onChangeEditingDesc = (payload) => setEditingDesc(payload);
+  const [taskName, setTaskName] = useState();
+  const [desc, setDesc] = useState();
+
+  const onChangeEditingTaskName = (payload) => setTaskName(payload);
+  const onChangeDesc = (payload) => setDesc(payload);
 
   const goBack = () => {
     navigation.goBack();
   };
 
   const createTask = () => {
-    console.log("new task");
+    const obj = {
+      project: "My Routine",
+      type: "one-time-complete",
+      name: taskName,
+      data: [],
+    };
+    projectData.push(obj);
+    saveData([...projectData]);
+
+    goBack();
   };
+
+  // const updateProjectData = (taskName, newData) => {
+  //   const newProjectData = projectData;
+  //   newProjectData[taskName] = newData;
+  //   saveData([...newProjectData]);
+  // };
+
+  // {
+  //   "project": "My Routine",
+  //   "type": "one-time-complete",
+  //   "name": "Probiotics",
+  //   "data": [
+  //   ]
+  // }
 
   // Return
   return (
@@ -122,8 +147,8 @@ const MultiComplete = ({ route, navigation }) => {
           <Title
             returnKeyType="done"
             onSubmitEditing={() => console.log("submitted")}
-            onChangeText={onChangeEditingTitle}
-            value={editingTitle}
+            onChangeText={onChangeEditingTaskName}
+            value={taskName}
             placeholder={"Untitled"}
             autoComplete="off"
             autoCorrect={false}
@@ -139,8 +164,8 @@ const MultiComplete = ({ route, navigation }) => {
           <Desc
             returnKeyType="done"
             onSubmitEditing={() => console.log("submitted")}
-            onChangeText={onChangeEditingDesc}
-            value={editingDesc}
+            onChangeText={onChangeDesc}
+            value={desc}
             placeholder={"Add details"}
             autoComplete="off"
             autoCorrect={false}
