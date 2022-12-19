@@ -88,6 +88,9 @@ const Txt = styled.Text``;
 // MultiComplete
 const MultiComplete = ({ route, navigation }) => {
   const projectData = route.params.projectData;
+
+  const [oldTaskName, setOldTaskName] = useState(null);
+  const [oldDesc, setOldDesc] = useState(null);
   const [taskName, setTaskName] = useState("");
   const [desc, setDesc] = useState("");
 
@@ -97,6 +100,17 @@ const MultiComplete = ({ route, navigation }) => {
   const goBack = () => {
     navigation.goBack();
   };
+
+  useState(() => {
+    if (route.params.taskName) {
+      setOldTaskName(route.params.taskName);
+      setTaskName(route.params.taskName);
+    }
+    if (route.params.desc) {
+      setOldDesc(route.params.desc);
+      setDesc(route.params.desc);
+    }
+  }, [navigation]);
 
   const createTask = () => {
     const obj = {
@@ -111,6 +125,19 @@ const MultiComplete = ({ route, navigation }) => {
     goBack();
   };
 
+  const editTask = () => {
+    if (oldTaskName && oldDesc) {
+      const newProjectData = [...projectData];
+      const objIndex = newProjectData.findIndex(
+        (obj) => obj.name == oldTaskName
+      );
+      newProjectData[objIndex].name = taskName;
+      newProjectData[objIndex].desc = desc;
+      saveData([...newProjectData]);
+      goBack();
+    }
+  };
+
   // Return
   return (
     <Container>
@@ -118,8 +145,10 @@ const MultiComplete = ({ route, navigation }) => {
         <CancelBtn onPress={goBack}>
           <CancelTxt>Cancel</CancelTxt>
         </CancelBtn>
-        <CreateBtn onPress={createTask}>
-          <CreateTxt>Create</CreateTxt>
+        <CreateBtn
+          onPress={route.params.label === "Create" ? createTask : editTask}
+        >
+          <CreateTxt>{route.params.label}</CreateTxt>
         </CreateBtn>
       </BtnBox>
 

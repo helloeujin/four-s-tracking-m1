@@ -56,6 +56,8 @@ const Home = ({ navigation, route }) => {
     newProjectData[taskName] = newData;
     setProjectData([...newProjectData]);
     saveData([...newProjectData]);
+    // console.log("...");
+    // console.log(newProjectData[taskName]);
   };
 
   // Working with Local Storage
@@ -152,6 +154,8 @@ const Home = ({ navigation, route }) => {
               key={Date.now() + i}
               updateProjectData={updateProjectData}
               oldIndex={oldIndex.current}
+              navigation={navigation}
+              projectData={projectData}
             />
           );
         })}

@@ -15,7 +15,7 @@ const HedContainer = styled.TouchableOpacity`
   justify-content: space-between;
   margin-left: 28px;
   margin-right: 8px;
-  margin-bottom: 4px;
+  margin-bottom: 2.5px;
 `;
 const TicklesHed = styled.Text`
   font-size: 15.5px;
@@ -39,8 +39,23 @@ const Ticklesbox = ({
   swiperIndex,
   updateProjectData,
   oldIndex,
+  navigation,
+  projectData,
 }) => {
   const ticklesRef = useRef(null);
+
+  const goToEditMulti = (e) => {
+    // passing params to stack screen
+    navigation.navigate("Stack", {
+      screen: "MultiComplete",
+      params: {
+        projectData,
+        label: "Edit",
+        taskName: ticklesData.name,
+        desc: ticklesData.desc,
+      },
+    });
+  };
 
   // Set up swiper with useRef
   useEffect(() => {
@@ -52,8 +67,12 @@ const Ticklesbox = ({
   //////////////////
   return (
     <Container>
-      <HedContainer>
-        <TicklesHed>{ticklesData.name}</TicklesHed>
+      <HedContainer onPress={goToEditMulti}>
+        {ticklesData.name ? (
+          <TicklesHed>{ticklesData.name}</TicklesHed>
+        ) : (
+          <TicklesHed>...</TicklesHed>
+        )}
         {/* <Entypo name="dots-three-vertical" size={12} color="#888" /> */}
       </HedContainer>
 

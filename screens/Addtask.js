@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import styled from "styled-components/native";
 import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
-import { useNavigation } from "@react-navigation/native";
+// import { useNavigation } from "@react-navigation/native";
 
 const Container = styled.View`
   margin-top: 10px;
@@ -59,7 +59,7 @@ const Addtask = ({ toggleModal, navigation, projectData }) => {
     // passing params to stack screen
     navigation.navigate("Stack", {
       screen: "MultiComplete",
-      params: { projectData },
+      params: { projectData, label: "Create" },
     });
   };
 
