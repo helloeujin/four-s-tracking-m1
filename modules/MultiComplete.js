@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components/native";
 import { Feather, Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { useState } from "react";
-import { useNavigation } from "@react-navigation/native";
 import { colorList } from "../functions/datafn";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 const Container = styled.View`
   flex: 1;
@@ -86,8 +86,9 @@ const Desc = styled.TextInput`
 const Txt = styled.Text``;
 
 // MultiComplete
-const MultiComplete = ({}) => {
-  const navigation = useNavigation();
+const MultiComplete = ({ route, navigation }) => {
+  // const navigation = useNavigation();
+  console.log(route.params);
 
   const [editingTitle, setEditingTitle] = useState();
   const [editingDesc, setEditingDesc] = useState();
@@ -99,6 +100,10 @@ const MultiComplete = ({}) => {
     navigation.goBack();
   };
 
+  const createTask = () => {
+    console.log("new task");
+  };
+
   // Return
   return (
     <Container>
@@ -106,7 +111,7 @@ const MultiComplete = ({}) => {
         <CancelBtn onPress={goBack}>
           <CancelTxt>Cancel</CancelTxt>
         </CancelBtn>
-        <CreateBtn>
+        <CreateBtn onPress={createTask}>
           <CreateTxt>Create</CreateTxt>
         </CreateBtn>
       </BtnBox>

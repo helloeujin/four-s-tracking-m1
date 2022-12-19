@@ -9,6 +9,7 @@ import { Feather, Ionicons } from "@expo/vector-icons";
 import { Button, View } from "react-native";
 import Modal from "react-native-modal";
 import Addtask from "../screens/Addtask";
+import { useIsFocused } from "@react-navigation/native";
 
 // const numDataArray = [...Array(8).keys()]; // for testing
 const testData2 = require("../data/test3.json");
@@ -40,8 +41,7 @@ const Home = ({ navigation, route }) => {
   const weekData = getDates(numWeeks);
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
-
-  const [projectData, setProjectData] = useState(null);
+  const isFocused = useIsFocused();
 
   /// transparent modal
   const [isModalVisible, setModalVisible] = useState(false);
@@ -50,6 +50,7 @@ const Home = ({ navigation, route }) => {
   };
 
   // updateProjectData
+  const [projectData, setProjectData] = useState(null);
   const updateProjectData = (taskName, newData) => {
     const newProjectData = projectData;
     newProjectData[taskName] = newData;
@@ -85,6 +86,11 @@ const Home = ({ navigation, route }) => {
     // load data from local storage
     loadData();
   }, []);
+
+  useEffect(() => {
+    // console.log(isFocused);
+    loadData();
+  }, [isFocused]);
 
   // Get HeaderRight Event from tab (to show transparent)
   useEffect(() => {
@@ -167,7 +173,11 @@ const Home = ({ navigation, route }) => {
           animationInTiming={320}
           animationOutTiming={10}
         >
-          <Addtask toggleModal={toggleModal} />
+          <Addtask
+            toggleModal={toggleModal}
+            navigation={navigation}
+            projectData={projectData}
+          />
         </Modal>
       </View>
     </Container>

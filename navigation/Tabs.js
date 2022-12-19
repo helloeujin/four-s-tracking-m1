@@ -6,9 +6,7 @@ import Stat from "../screens/Stat";
 import { useNavigation, DrawerActions } from "@react-navigation/native";
 import { Feather, Ionicons } from "@expo/vector-icons";
 import styled from "styled-components/native";
-import Modal from "react-native-modal";
-import { View, Button } from "react-native";
-import Addtask from "../screens/Addtask";
+import { View } from "react-native";
 
 const AddBttn = styled.TouchableOpacity`
   padding-right: 15px;
@@ -16,7 +14,6 @@ const AddBttn = styled.TouchableOpacity`
 const BurgerBttn = styled.TouchableOpacity`
   padding-left: 15px;
 `;
-
 const Tab = createBottomTabNavigator();
 
 /////////////
