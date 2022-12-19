@@ -37,7 +37,6 @@ const AddBttn = styled.TouchableOpacity`
 
 /////////// HOME ///////////
 const Home = ({ navigation, route }) => {
-  // console.log(route);
   const weekData = getDates(numWeeks);
   const oldIndex = useRef(numWeeks - 1);
   const tickleSwipersRef = useRef([]);
@@ -56,8 +55,6 @@ const Home = ({ navigation, route }) => {
     newProjectData[taskName] = newData;
     setProjectData([...newProjectData]);
     saveData([...newProjectData]);
-    // console.log("...");
-    // console.log(newProjectData[taskName]);
   };
 
   // Working with Local Storage
@@ -72,11 +69,6 @@ const Home = ({ navigation, route }) => {
       setProjectData(testData2);
     }
   };
-
-  // // Data update
-  // useEffect(() => {
-  //   console.log(projectData);
-  // }, [projectData]);
 
   // Initialization
   useEffect(() => {

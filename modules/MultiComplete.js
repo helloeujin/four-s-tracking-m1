@@ -82,8 +82,23 @@ const EditDesc = styled.View`
 const Desc = styled.TextInput`
   font-size: 16px;
 `;
-
 const Txt = styled.Text``;
+
+// Delete
+const DeleteBtn = styled.TouchableOpacity`
+  background-color: #bbb;
+  position: absolute;
+  bottom: 5%
+  width: 84%;
+  margin-left: 8%;
+  height: 38px;
+  border-radius: 8px;
+`;
+const DeleteTxt = styled.Text`
+  color: #fff;
+  margin: auto;
+  font-size: 15px;
+`;
 
 // MultiComplete
 const MultiComplete = ({ route, navigation }) => {
@@ -133,6 +148,16 @@ const MultiComplete = ({ route, navigation }) => {
       );
       newProjectData[objIndex].name = taskName;
       newProjectData[objIndex].desc = desc;
+      saveData([...newProjectData]);
+      goBack();
+    }
+  };
+
+  const deleteTask = () => {
+    if (oldTaskName && oldDesc) {
+      const newProjectData = [...projectData].filter(
+        (d) => d.name !== oldTaskName
+      );
       saveData([...newProjectData]);
       goBack();
     }
@@ -201,6 +226,12 @@ const MultiComplete = ({ route, navigation }) => {
           <Txt>Once a day</Txt>
         </RightCol>
       </EditDesc>
+
+      {route.params.label === "Edit" ? (
+        <DeleteBtn onPress={deleteTask}>
+          <DeleteTxt>Delete</DeleteTxt>
+        </DeleteBtn>
+      ) : null}
     </Container>
   );
 };

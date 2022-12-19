@@ -5,10 +5,7 @@ import {
   DrawerItem,
   DrawerItemList,
 } from "@react-navigation/drawer";
-import Profile from "../screens/Profile";
 import Tabs from "./Tabs";
-import { MaterialIcons } from "@expo/vector-icons";
-import { Text } from "react-native";
 import styled from "styled-components";
 
 const ProfileContainer = styled.View`
@@ -28,8 +25,8 @@ const ProfileNameBold = styled.Text`
   font-weight: bold;
 `;
 const ProfileImg = styled.Image`
-  width: 80px;
-  height: 80px;
+  width: 76px;
+  height: 76px;
 `;
 
 const DrawerNav = createDrawerNavigator();
