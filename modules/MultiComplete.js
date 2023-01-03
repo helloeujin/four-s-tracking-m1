@@ -141,7 +141,8 @@ const MultiComplete = ({ route, navigation }) => {
   };
 
   const editTask = () => {
-    if (oldTaskName && oldDesc) {
+    // if (oldTaskName && oldDesc) {
+    if (oldTaskName) {
       const newProjectData = [...projectData];
       const objIndex = newProjectData.findIndex(
         (obj) => obj.name == oldTaskName
@@ -154,7 +155,8 @@ const MultiComplete = ({ route, navigation }) => {
   };
 
   const deleteTask = () => {
-    if (oldTaskName && oldDesc) {
+    // if (oldTaskName && oldDesc) {
+    if (oldTaskName) {
       const newProjectData = [...projectData].filter(
         (d) => d.name !== oldTaskName
       );
@@ -227,7 +229,7 @@ const MultiComplete = ({ route, navigation }) => {
         </RightCol>
       </EditDesc>
 
-      {route.params.label === "Edit" ? (
+      {route.params.label !== "Create" ? (
         <DeleteBtn onPress={deleteTask}>
           <DeleteTxt>Delete</DeleteTxt>
         </DeleteBtn>

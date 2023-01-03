@@ -1,6 +1,5 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import Profile from "../screens/Profile";
 import MultiComplete from "../modules/MultiComplete";
 
 const StackNav = createStackNavigator();

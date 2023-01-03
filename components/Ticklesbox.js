@@ -50,7 +50,7 @@ const Ticklesbox = ({
       screen: "MultiComplete",
       params: {
         projectData,
-        label: "Edit",
+        label: "Update",
         taskName: ticklesData.name,
         desc: ticklesData.desc,
       },
@@ -73,7 +73,6 @@ const Ticklesbox = ({
         ) : (
           <TicklesHed>...</TicklesHed>
         )}
-        {/* <Entypo name="dots-three-vertical" size={12} color="#888" /> */}
       </HedContainer>
 
       {ticklesData.desc ? <TicklesDesc>{ticklesData.desc}</TicklesDesc> : null}
@@ -85,7 +84,6 @@ const Ticklesbox = ({
         containerStyle={{
           width: "100%",
           height: "100%",
-          // marginBottom: 40,
           marginTop: 10,
         }}
         showsButtons={false}

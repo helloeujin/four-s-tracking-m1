@@ -5,13 +5,13 @@ import EachWeek from "../components/EachWeek";
 import Ticklesbox from "../components/Ticklesbox";
 import { getDates, getSlideIndex, saveData } from "../functions/datafn";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { Feather, Ionicons } from "@expo/vector-icons";
-import { Button, View } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import { View } from "react-native";
 import Modal from "react-native-modal";
 import Addtask from "../screens/Addtask";
 import { useIsFocused } from "@react-navigation/native";
 
-// const numDataArray = [...Array(8).keys()]; // for testing
+// project data
 const testData2 = require("../data/test3.json");
 const numWeeks = 4;
 const numWeeksArray = [...Array(numWeeks).keys()];
@@ -48,7 +48,7 @@ const Home = ({ navigation, route }) => {
     setModalVisible(!isModalVisible);
   };
 
-  // updateProjectData
+  // update project data
   const [projectData, setProjectData] = useState(null);
   const updateProjectData = (taskName, newData) => {
     const newProjectData = projectData;
@@ -61,7 +61,7 @@ const Home = ({ navigation, route }) => {
   const STORAGE_KEY = "@my_routine";
   const loadData = async () => {
     // await AsyncStorage.clear(); //reset storage -> throw error
-    // await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove); //reset storage
+    // await AsyncStorage.getAllKeys().then(AsyncStorage.multiRemove); //reset storage -> working
     const storedData = await AsyncStorage.getItem(STORAGE_KEY);
     if (storedData) {
       setProjectData(JSON.parse(storedData));
@@ -70,18 +70,22 @@ const Home = ({ navigation, route }) => {
     }
   };
 
-  // Initialization
+  // init > load data from local storage
   useEffect(() => {
-    // load data from local storage
     loadData();
   }, []);
 
+  // check if this nav is focused
   useEffect(() => {
-    // console.log(isFocused);
     loadData();
   }, [isFocused]);
 
-  // Get HeaderRight Event from tab (to show transparent)
+  // useEffect(() => {
+  //   console.log("...");
+  //   console.log(projectData);
+  // }, [projectData]);
+
+  // get HeaderRight Event from tab (to show transparent modal)
   useEffect(() => {
     navigation.setOptions({
       headerRight: () => (
@@ -94,10 +98,10 @@ const Home = ({ navigation, route }) => {
     });
   }, [navigation]);
 
-  // Redering
+  //// RENDERING
   return (
     <Container>
-      {/* DATES */}
+      {/* WEEKLY DATES */}
       <WeekContainer>
         <Swiper
           index={numWeeks - 1}
@@ -133,7 +137,6 @@ const Home = ({ navigation, route }) => {
       {/* TICKLES */}
       <TicklesContainer>
         {projectData?.map((eachData, i) => {
-          // console.log(i);
           return (
             <Ticklesbox
               weekData={weekData}
@@ -154,7 +157,7 @@ const Home = ({ navigation, route }) => {
       </TicklesContainer>
 
       <View>
-        {/* Modal Contents */}
+        {/* Transparent Modal */}
         <Modal
           isVisible={isModalVisible}
           backdropColor={"white"}

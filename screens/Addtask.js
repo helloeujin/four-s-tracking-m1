@@ -53,7 +53,6 @@ const Gobackbtn = styled.TouchableOpacity`
 
 ////////
 const Addtask = ({ toggleModal, navigation, projectData }) => {
-  // console.log("add task", projectData);
   const goToAddMulti = (e) => {
     toggleModal();
     // passing params to stack screen
